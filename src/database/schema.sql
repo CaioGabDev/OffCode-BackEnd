@@ -56,4 +56,23 @@ INSERT INTO comentarios (id_usuario, id_post, conteudo_comentario, anexo, data_p
 (3, 4, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
 (4, 3, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
 (5, 6, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
-(6, 5, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
+(6, 5, 'amei seu post. ajudou muito', NULL, '2025-07-23');
+
+CREATE TABLE curtidas (
+    id_curtida SERIAL PRIMARY KEY,
+    id_usuario INT NOT NULL, --FK
+    id_post INT, --FK
+    id_comentario INT, --FK
+    quantidade_curtidas INT NOT NULL,
+    CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    CONSTRAINT fk_post FOREIGN KEY (id_post) REFERENCES posts(id_post),
+    CONSTRAINT fk_comentarios FOREIGN KEY (id_comentario) REFERENCES comentarios(id_comentario)
+);
+
+INSERT INTO curtidas (id_usuario, id_post, id_comentario, quantidade_curtidas) VALUES 
+(1, 4, 2, 3),
+(2, NULL, 3, 1),
+(3, 5, 2, 1),
+(4, NULL, 1, 1),
+(5, 6, 2, 1),
+(6, NULL, 3, 5);
