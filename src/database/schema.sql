@@ -5,13 +5,13 @@ CREATE DATABASE offcode;
 CREATE TABLE usuarios (
     id_usuario SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    username VARCHAR(50) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    tipo_conta VARCHAR(50) CHECK (tipo_conta IN ('Empresa', 'Pessoal')),
+    senha VARCHAR(20) NOT NULL,
+    tipo_conta VARCHAR(7) CHECK (tipo_conta IN ('Empresa', 'Pessoal')),
     foto_perfil TEXT,
     foto_capa TEXT,
-    descricao TEXT,
+    descricao VARCHAR(600),
     especializacoes TEXT
 );
 
