@@ -1,10 +1,13 @@
 const pool = require("../config/database");
 
-const getComments = async (postId) => {
-    const result = postId
-        ? await pool.query("SELECT * FROM comentarios WHERE id_post = $1", [postId])
-        : await pool.query("SELECT * FROM comentarios");
-    return result.rows;
+const getComments = async (conteudo_comentario) => {
+    if (!conteudo_comentario) {
+        const result = await pool.query("SELECT * FROM comentarios WHERE id_post = $1", [`%${conteudo_comentario}`]);
+        return result.rows;
+} else {
+        const result = await pool.query("SELECT * FROM comentarios");
+        return result.rows;
+}
 };
 
 const getCommentById = async (id) => {
@@ -43,10 +46,4 @@ const createComment = async (id_usuario, id_post, conteudo_comentario, anexo, da
     return result.rows[0];
 };
 
-module.exports = {
-    getComments,
-    getCommentById,
-    deleteComment,
-    updateComment,
-    createComment
-};
+module.exports = { getComments, getCommentById, deleteComment, updateComment, createComment };
