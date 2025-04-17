@@ -4,8 +4,8 @@ const router = express.Router();
 
 const likeController = require("../controllers/likeController");
 
-router.get("/", likeController.getAllLikes);
-router.post("/", likeController.createLike);
-router.delete("/:id", likeController.deleteLike);
+router.get("/like", likeController.getAllLikes);
+router.post("/like", likeController.createLike);
+router.delete("/like/:id", likeController.deleteLike);
 
 module.exports = router;
