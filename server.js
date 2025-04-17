@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./src/routes/userRoutes");
 const likeRoutes = require("./src/routes/likeRoutes");
+const postRoutes = require("./src/routes/postRoutes");
 
 
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/like", likeRoutes );
+app.use("/api", postRoutes);
 
 
 const PORT = process.env.PORT || 3000;
