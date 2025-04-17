@@ -2,11 +2,10 @@ const LikeModel = require('../models/LikeModel');
 
 const getAllLikes = async (req, res) => {
     try {
-        const {name} = req.query;
-        const likes = await LikeModel.getLikes(name);
+        const likes = await LikeModel.getLikes();
         res.json(likes);
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao buscar usuários.' });
+        res.status(500).json({ error: 'Erro ao buscar curtidas.' });
     }
 };
 
@@ -17,22 +16,44 @@ const deleteLike = async (req, res) => {
             return res.status(404).json(result);
         }
         res.json(result);
-
     } catch (error) {
-        console.error('Erro ao buscar usuários:', error);
-        res.status(500).json({ error: 'Erro ao deletar usuário.' });
+        console.error('Erro ao buscar curtidas:', error);
+        res.status(500).json({ error: 'Erro ao deletar curtida.' });
     }
-}
+};
 
 const createLike = async (req, res) => {
     try {
-        const { } = req.body;
-        const like = await LikeModel.createLikes(nome, Likename, email, senha, tipo_conta, foto_perfil, descricao, especializacoes);
+        const { id_usuario, id_comentario, id_post, quantidade_curtidas } = req.body;
+        const like = await LikeModel.createLikes(id_usuario, id_comentario, id_post, quantidade_curtidas);
         res.status(201).json(like);
     } catch (error) {
-        res.status(500).json({ message: "Erro ao criar o usuário." });
+        res.status(500).json({ message: "Erro ao criar a curtida." });
     }
 }
 
+const updateLike = async (req, res) => {
+    try {
+        const { id_usuario, id_comentario, id_post, quantidade_curtidas } = req.body;
+        const like = await LikeModel.updateLikes(id_usuario, id_comentario, id_post, quantidade_curtidas);
+        res.status(201).json(like);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar a curtida." });
+    }
+}   
 
-module.exports = {getAllLikes, deleteLike, createLike};
+const getLikeById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const like = await LikeModel.getLikesById(id);
+        if (!like) {
+            return res.status(404).json({ error: 'Curtida não encontrada.' });
+        }
+        res.json(like);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar curtida.' });
+    }
+}
+
+module.exports = {getAllLikes, deleteLike, createLike, updateLike, getLikeById};
