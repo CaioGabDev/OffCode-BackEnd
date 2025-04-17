@@ -9,8 +9,8 @@ CREATE TABLE usuarios (
     email VARCHAR(150) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
     tipo_conta VARCHAR(50) CHECK (tipo_conta IN ('Empresa', 'Pessoal')),
-    foto_perfil VARCHAR(255),
-    foto_capa VARCHAR(255),
+    foto_perfil TEXT,
+    foto_capa TEXT,
     descricao TEXT,
     especializacoes TEXT
 );
@@ -27,7 +27,7 @@ CREATE TABLE posts (
     id_post SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL, 
     conteudo_post TEXT NOT NULL,
-    anexo VARCHAR(255), 
+    anexo TEXT, 
     data_publicacao DATE,
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
@@ -45,7 +45,7 @@ CREATE TABLE comentarios (
     id_usuario INT NOT NULL, --FK
     id_post INT NOT NULL, --FK
     conteudo_comentario TEXT NOT NULL,
-    anexo VARCHAR(255), 
+    anexo TEXT, 
     data_publicacao DATE,
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     CONSTRAINT fk_post FOREIGN KEY (id_post) REFERENCES posts(id_post) 
