@@ -32,14 +32,7 @@ CREATE TABLE posts (
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
-INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
-(1, 'Meu ritual antes de começar a codar...', 'https://i.pinimg.com/736x/01/ec/e5/01ece52b11d155f053f50a7a6293a6ce.jpg', '2025-04-24'),
-(2, 'Mostre seu layout mais bonito (ou mais caótico 😅)', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwufcE7pyPpNLayzb33eWmx2Jny71qRRyg3w&s', '2025-04-24'),
-(3, 'Dica do dia: sempre leia sua DELETE 3x antes de apertar Enter. Ou escreva um testamento antes.', 'NULL', '2025-04-24'),
-(4, 'Já perdeu dados no banco? Como?', 'NULL', '2025-04-24'),
-(5, 'Qual linguagem você usa no back-end? Node, Go, Python, Java, outra? (e por quê?)', 'NULL', '2025-04-24'),
-(6, 'Eu tentando entender por que a API morreu às 3h17 da manhã 💀', 'https://miro.medium.com/v2/resize:fit:1400/1*Al1fMG4yFlw033208Bu3MA.png', '2025-04-24');
-
++
 CREATE TABLE comentarios (
     id_comentario SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL, --FK
