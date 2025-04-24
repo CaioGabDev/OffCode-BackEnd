@@ -16,12 +16,12 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios (nome, username, email, senha, tipo_conta, foto_perfil, foto_capa, descricao, especializacoes) VALUES 
-('Ana Carolina', 'ana_carol', 'ana.carol@gmail.com', 'anacarol123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Front-end'),
-('Ana Julia', 'ana_julia', 'ana.julia@gmail.com', 'anajulia123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Front-end'),
-('Beatriz', 'bea_triz', 'bea.triz@gmail.com', 'beatriz123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Banco de dados'),
-('Bernardo', 'bern_ardo', 'bern.cardo@gmail.com', 'bernardo123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Back-end'),
-('Caio', 'ca_io', 'ca.io@gmail.com', 'caio123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Back-end'),
-('Luana', 'lu_ana', 'lu.ana@gmail.com', 'luana123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Banco de dados');
+('Ana Carolina Garcia Freitas', '@AnaCarolinaFreitas', 'ana.c.freitas35@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210617?v=4', 'NULL', 'NULL', 'NULL'),
+('Ana Julia Pinheiro Demattei', '@anajudemattei', 'ana.demattei@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210311?v=4', 'NULL', 'NULL', 'NULL'),
+('Beatriz Lima', '@limabea23', 'beatriz.lima14@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210831?v=4', 'NULL', 'NULL', 'NULL'),
+('Bernardo Gabriel de Moraes Marques', '@Bernardo1401', 'bernardo.g.marques@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158209610?v=4', 'NULL', 'NULL', 'NULL'),
+('Caio Gabriel Lacerda Silva', '@CaioLacerdaDev', 'caio.g.silva20@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210310?v=4', 'NULL', 'NULL', 'NULL'),
+('Luana Domeneghetti', '@domeneghetti', 'luana.domeneghetti@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210063?v=4', 'NULL', 'NULL', 'NULL');
 
 CREATE TABLE posts (
     id_post SERIAL PRIMARY KEY,
@@ -33,12 +33,12 @@ CREATE TABLE posts (
 );
 
 INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
-(1, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2023-06-14'),
-(2, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2024-12-30'),
-(3, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2025-04-11'),
-(4, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2025-07-23'),
-(5, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2023-01-01'),
-(6, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2023-01-01');
+(1, 'Meu ritual antes de começar a codar...', 'https://i.pinimg.com/736x/01/ec/e5/01ece52b11d155f053f50a7a6293a6ce.jpg', '2025-04-24'),
+(2, 'Mostre seu layout mais bonito (ou mais caótico 😅)', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwufcE7pyPpNLayzb33eWmx2Jny71qRRyg3w&s', '2025-04-24'),
+(3, 'Dica do dia: sempre leia sua DELETE 3x antes de apertar Enter. Ou escreva um testamento antes.', 'NULL', '2025-04-24'),
+(4, 'Já perdeu dados no banco? Como?', 'NULL', '2025-04-24'),
+(5, 'Qual linguagem você usa no back-end? Node, Go, Python, Java, outra? (e por quê?)', 'NULL', '2025-04-24'),
+(6, 'Eu tentando entender por que a API morreu às 3h17 da manhã 💀', 'https://miro.medium.com/v2/resize:fit:1400/1*Al1fMG4yFlw033208Bu3MA.png', '2025-04-24');
 
 CREATE TABLE comentarios (
     id_comentario SERIAL PRIMARY KEY,
