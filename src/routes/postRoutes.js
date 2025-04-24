@@ -72,7 +72,22 @@ router.post("/post", postController.createPost);
 
 router.put("/post/:id", postController.updatePost);
 
-
+/**
+ * @swagger
+ * /api/post/{id}:
+ *   delete:
+ *     summary: Deleta um post
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Post deletado com sucesso!
+ */
 router.delete("/post/:id", postController.deletePost);
 
 module.exports = router;
