@@ -6,6 +6,10 @@ const postController = require("../controllers/postController");
 
 const upload = require("../config/upload.js");
 
+const apiKeyMiddleware = require("../config/apiKey"); // 🔐
+
+router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
+
 /**
  * @swagger
  * tags:

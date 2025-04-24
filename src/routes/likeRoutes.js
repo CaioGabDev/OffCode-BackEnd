@@ -4,6 +4,11 @@ const router = express.Router();
 
 const likeController = require("../controllers/likeController");
 
+const apiKeyMiddleware = require("../config/apiKey"); // 🔐
+
+router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
+
+
 router.get("/like", likeController.getAllLikes);
 router.post("/like", likeController.createLike);
 router.delete("/like/:id", likeController.deleteLike);
