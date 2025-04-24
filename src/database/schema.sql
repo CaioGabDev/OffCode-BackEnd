@@ -56,8 +56,8 @@ INSERT INTO comentarios (id_usuario, id_post, conteudo_comentario, anexo, data_p
 (3, 4, 'Escrevi DELETE sem querer e tive que devolver todos os backups... nunca mais!! 😅', NULL, '2025-05-30'),
 (4, 3, 'Perdi dados em um banco uma vez, mas não foi nada comparado ao medo que senti na hora. Aquele pânico é inesquecível juro.', NULL, '2025-03-07'),
 (5, 6, 'Sempre amei Python, mas o Go tem me deixado intrigado. Preciso estudar mais...', NULL, '2025-07-18'),
-(6, 5, 'Eu também já perdi a API às 3h da manhã. A diferença é que, na minha versão, o servidor desceu pra dormir e não voltou.', 'api_dormindo.png', '2025-09-15');
-(7, 2, 'Tentei rodar um script em produção sem testes e o servidor ficou mais tempo em modo “offline” do que a minha conexão de internet. 🙄', NULL, '2025-08-22');
+(6, 5, 'Eu também já perdi a API às 3h da manhã. A diferença é que, na minha versão, o servidor desceu pra dormir e não voltou.', 'api_dormindo.png', '2025-09-15'),
+(2, 2, 'Tentei rodar um script em produção sem testes e o servidor ficou mais tempo em modo “offline” do que a minha conexão de internet. 🙄', NULL, '2025-08-22');
 
 
 CREATE TABLE curtidas (
