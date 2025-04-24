@@ -12,7 +12,7 @@ const upload = require("../config/upload.js");
 
 /**
  * @swagger
- * /api/users:
+ * /api/user:
  *   get:
  *     summary: Lista todos os users
  *     tags: [Users]
@@ -24,7 +24,7 @@ router.get('/user', UserController.getAllUsers);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/user/{id}:
  *   get:
  *     summary: Buscar usuario por ID
  *     tags: [Users]
@@ -44,7 +44,7 @@ router.get('/user/:id', UserController.getUserById);
 
 /**
  * @swagger
- * /api/users:
+ * /api/user:
  *   post:
  *     summary: Cria um novo usuario
  *     tags: [Users]
@@ -80,7 +80,7 @@ router.post('/user', upload.single("foto_perfil"), UserController.createUser);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/user/{id}:
  *   put:
  *     summary: Atualiza um usuario
  *     tags: [Users]
@@ -116,13 +116,13 @@ router.put('/user/:id', UserController.updateUser);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/user/{id}:
  *   delete:
  *     summary: Deleta um usuario
  *     tags: [Users]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: id_usuario
  *         required: true
  *         schema:
  *           type: integer
