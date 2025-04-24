@@ -25,7 +25,7 @@ router.get('/comment', CommentController.getAllComments);
 
 /**
  * @swagger
- * /api/post/{id}:
+ * /api/comment/{id}:
  *   get:
  *     summary: Buscar um comentários por ID
  *     tags: [Comments]
@@ -45,7 +45,7 @@ router.get('/comment/:id', CommentController.getCommentById);
 
 /**
  * @swagger
- * /api/post:
+ * /api/comment:
  *   post:
  *     summary: Cria um novo comentário
  *     tags: [Comments]
@@ -68,5 +68,37 @@ router.get('/comment/:id', CommentController.getCommentById);
  *         description: Comentário criado com sucesso!
  */
 router.post('/comment', CommentController.createComment);
+
+/**
+ * @swagger
+ * /api/comment/{id}:
+ *   put:
+ *     summary: Atualiza um comentário
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               house_id:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Comentário atualizado com sucesso!
+ */
+router.put('/comment/:id', CommentController.updateComment);
+
+
+
 
 module.exports = router;
