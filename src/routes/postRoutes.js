@@ -43,7 +43,30 @@ router.get("/post", postController.getAllPosts);
  */
 router.get("/post/:id", postController.getById);
 
-
+/**
+ * @swagger
+ * /api/post:
+ *   post:
+ *     summary: Cria um novo Post
+ *     tags: [Posts]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               house_id:
+ *                 type: integer
+ *               photo:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Post criado com sucesso!
+ */
 router.post("/post", postController.createPost);
 
 
