@@ -2,12 +2,15 @@ const LikeModel = require('../models/LikeModel');
 
 const getAllLikes = async (req, res) => {
     try {
-        const likes = await LikeModel.getLikes();
+        const { id_usuario } = req.query;
+        const likes = await LikeModel.getLikes(id_usuario);
         res.json(likes);
     } catch (error) {
+        console.error('Erro ao buscar curtidas:', error);
         res.status(500).json({ error: 'Erro ao buscar curtidas.' });
     }
 };
+
 
 const deleteLike = async (req, res) => {
     try {

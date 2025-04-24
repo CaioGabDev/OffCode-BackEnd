@@ -1,8 +1,11 @@
 const pool = require("../config/database");
 
 const getComments = async (conteudo_comentario) => {
-    if (!conteudo_comentario) {
-        const result = await pool.query("SELECT * FROM comentarios WHERE id_post = $1", [`%${conteudo_comentario}`]);
+    if (conteudo_comentario) {
+        const result = await pool.query(
+            "SELECT * FROM comentarios WHERE conteudo_comentario ILIKE $1",
+            [`%${conteudo_comentario}%`]
+        );
         return result.rows;
 } else {
         const result = await pool.query("SELECT * FROM comentarios");

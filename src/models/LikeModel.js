@@ -1,10 +1,19 @@
 const pool = require("../config/database");
 
 
-const getLikes = async () => {
-    const result = await pool.query("SELECT * FROM curtidas");
-    return result.rows;
+const getLikes = async (id_usuario) => {
+    if (id_usuario) {
+        const result = await pool.query(
+            "SELECT * FROM curtidas WHERE CAST(id_usuario AS TEXT) ILIKE $1", 
+            [`%${id_usuario}%`]
+        );
+        return result.rows;
+    } else {
+        const result = await pool.query("SELECT * FROM curtidas");
+        return result.rows;
+    }
 };
+
 const getLikesById = async (id) => {
     const result = await pool.query("SELECT * FROM curtidas WHERE id_curtidas = $1", [id]);
     return result.rows[0];
