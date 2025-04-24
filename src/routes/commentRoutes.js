@@ -1,12 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const CommentController = require('../controllers/commentController');
+const upload = require("../config/upload.js");
 
 
+/**
+ * @swagger
+ * tags:
+ *   name: Comentários
+ *   description: Gerenciamento de comentários
+ */
+
+/**
+ * @swagger
+ * /api/comment:
+ *   get:
+ *     summary: Lista todos os comentários
+ *     tags: [Comments]
+ *     responses:
+ *       200:
+ *         description: Lista de comentários
+ */
 router.get('/comment', CommentController.getAllComments);
-router.get('/comment/:id', CommentController.getCommentById);
-router.delete('/comment/:id', CommentController.deleteComment);
-router.put('/comment/:id', CommentController.updateComment);
-router.post('/comment', CommentController.createComment);
+
 
 module.exports = router;
