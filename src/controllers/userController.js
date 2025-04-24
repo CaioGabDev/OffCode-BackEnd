@@ -51,7 +51,8 @@ const updateUser = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const { } = req.body;
+        const { nome, username, email, senha, tipo_conta, descricao, especializacoes} = req.body;
+        const foto_perfil = req.file ? req.file.filename : null;
         const user = await UserModel.createUsers(nome, username, email, senha, tipo_conta, foto_perfil, descricao, especializacoes);
         res.status(201).json(user);
     } catch (error) {
