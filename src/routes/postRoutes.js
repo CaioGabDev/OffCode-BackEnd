@@ -4,6 +4,8 @@ const router = express.Router();
 
 const postController = require("../controllers/postController");
 
+const upload = require("../config/upload.js");
+
 /**
  * @swagger
  * tags:
@@ -67,9 +69,35 @@ router.get("/post/:id", postController.getById);
  *       201:
  *         description: Post criado com sucesso!
  */
-router.post("/post", postController.createPost);
+router.post("/post", upload.single("anexo"), postController.createPost);
 
-
+/**
+ * @swagger
+ * /api/post/{id}:
+ *   put:
+ *     summary: Atualiza um post
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               house_id:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Post atualizado com sucesso!
+ */
 router.put("/post/:id", postController.updatePost);
 
 /**

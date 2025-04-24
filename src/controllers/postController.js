@@ -25,7 +25,8 @@ const getById = async (req, res) => {
 
 const createPost = async (req, res) => {
     try {
-        const { conteudo_post, anexo, id_usuario } = req.body;
+        const { conteudo_post, id_usuario } = req.body;
+        const anexo  = req.file ? req.file.filename : null;
         const newPost = await PostModel.createPost(conteudo_post, anexo, id_usuario);
         res.status(201).json(newPost);
     } catch (error) {
