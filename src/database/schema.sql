@@ -52,12 +52,12 @@ CREATE TABLE comentarios (
 );
 
 INSERT INTO comentarios (id_usuario, id_post, conteudo_comentario, anexo, data_publicacao) VALUES
-(1, 2, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
-(2, 1, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
-(3, 4, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
-(4, 3, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
-(5, 6, 'amei seu post. ajudou muito', NULL, '2025-07-23'),
-(6, 5, 'amei seu post. ajudou muito', NULL, '2025-07-23');
+(2, 1, 'O meu layout está em um estado tão caótico que até o código se perde no caminho. 😂', NULL, '2025-06-20'),
+(3, 4, 'Escrevi DELETE sem querer e tive que devolver todos os backups... nunca mais!! 😅', NULL, '2025-05-30'),
+(4, 3, 'Perdi dados em um banco uma vez, mas não foi nada comparado ao medo que senti na hora. Aquele pânico é inesquecível juro.', NULL, '2025-03-07'),
+(5, 6, 'Sempre amei Python, mas o Go tem me deixado intrigado. Preciso estudar mais...', NULL, '2025-07-18'),
+(6, 5, 'Eu também já perdi a API às 3h da manhã. A diferença é que, na minha versão, o servidor desceu pra dormir e não voltou.', 'api_dormindo.png', '2025-09-15');
+
 
 CREATE TABLE curtidas (
     id_curtida SERIAL PRIMARY KEY,
@@ -71,9 +71,9 @@ CREATE TABLE curtidas (
 );
 
 INSERT INTO curtidas (id_usuario, id_post, id_comentario, quantidade_curtidas) VALUES 
-(1, 4, 2, 3),
-(2, NULL, 3, 1),
-(3, 5, 2, 1),
-(4, NULL, 1, 1),
-(5, 6, 2, 1),
-(6, NULL, 3, 5);
+(1, 4, 2, 3), 
+(2, 3, 4, 1), 
+(3, 2, NULL, 5), 
+(4, 5, 3, 2), 
+(5, 1, NULL, 4), 
+(6, 2, 1, 7); 
