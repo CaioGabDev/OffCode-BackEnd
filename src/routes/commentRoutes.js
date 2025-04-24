@@ -23,5 +23,25 @@ const upload = require("../config/upload.js");
  */
 router.get('/comment', CommentController.getAllComments);
 
+/**
+ * @swagger
+ * /api/post/{id}:
+ *   get:
+ *     summary: Buscar um comentários por ID
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Comentários encontrado
+ *       404:
+ *         description: Comentários não encontrado
+ */
+router.get('/comment/:id', CommentController.getCommentById);
+
 
 module.exports = router;
