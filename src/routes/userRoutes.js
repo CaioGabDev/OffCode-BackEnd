@@ -55,18 +55,64 @@ router.get('/user/:id', UserController.getUserById);
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               nome:
  *                 type: string
- *               house_id:
- *                 type: integer
- *               photo:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
+ *               tipo_conta:
+ *                 type: string
+ *               foto_perfil:
  *                 type: string
  *                 format: binary
+ *               descricao:
+ *                 type: string
+ *               especializacoes:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Usuario criado
  */
 router.post('/user', upload.single("foto_perfil"), UserController.createUser);
+
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   put:
+ *     summary: Atualiza um usuario
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
+ *               tipo_conta:
+ *                 type: string
+ *               foto_perfil:
+ *                 type: string
+ *                 format: binary
+ *               descricao:
+ *                 type: string
+ *               especializacoes:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Usuario atualizado
+ */
+router.put('/user/:id', UserController.updateUser);
 
 /**
  * @swagger
@@ -85,35 +131,5 @@ router.post('/user', upload.single("foto_perfil"), UserController.createUser);
  *         description: Usuario deletado
  */
 router.delete('/user/:id', UserController.deleteUser);
-
-/**
- * @swagger
- * /api/users/{id}:
- *   put:
- *     summary: Atualiza um usuario
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               house_id:
- *                 type: integer
- *     responses:
- *       200:
- *         description: Usuario atualizado
- */
-router.put('/user/:id', UserController.updateUser);
-
 
 module.exports = router;

@@ -10,7 +10,7 @@ const options = {
       description: 'Documentação da API para gerenciar uma rede social',
     },
   },
-  apis: ['../src/routes/*.js'],
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
