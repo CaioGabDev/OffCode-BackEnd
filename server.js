@@ -6,6 +6,7 @@ const userRoutes = require("./src/routes/userRoutes");
 const likeRoutes = require("./src/routes/likeRoutes");
 const postRoutes = require("./src/routes/postRoutes");
 const commentRoutes = require("./src/routes/commentRoutes");
+const setupSwagger = require('./src/config/swagger');
 
 
 
@@ -13,6 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+setupSwagger(app);
 
 app.use("/api", userRoutes);
 app.use("/api", likeRoutes );
