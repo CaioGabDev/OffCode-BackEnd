@@ -43,5 +43,30 @@ router.get('/comment', CommentController.getAllComments);
  */
 router.get('/comment/:id', CommentController.getCommentById);
 
+/**
+ * @swagger
+ * /api/post:
+ *   post:
+ *     summary: Cria um novo comentário
+ *     tags: [Comments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               house_id:
+ *                 type: integer
+ *               photo:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Comentário criado com sucesso!
+ */
+router.post('/comment', CommentController.createComment);
 
 module.exports = router;
