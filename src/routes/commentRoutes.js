@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const CommentController = require('../controllers/commentController');
 const upload = require("../config/upload.js");
+const apiKeyMiddleware = require("../config/apiKey"); // 🔐
+router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
 
 
 /**
