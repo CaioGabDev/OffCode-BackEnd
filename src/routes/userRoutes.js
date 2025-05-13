@@ -3,8 +3,8 @@ const router = express.Router();
 const UserController = require('../controllers/userController');
 const upload = require("../config/upload.js");
 const apiKeyMiddleware = require("../config/apiKey"); // 🔐
-router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
 
+router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
 
 /**
  * @swagger
@@ -17,11 +17,43 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  * @swagger
  * /api/user:
  *   get:
- *     summary: Lista todos os users
+ *     summary: Lista todos os usuários com possibilidade de filtrar pelo nome
  *     tags: [Users]
+ *     parameters:
+ *       - in: query
+ *         name: nome
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Filtro para buscar usuários pelo nome
  *     responses:
  *       200:
- *         description: Lista de usuarios
+ *         description: Lista de usuários (com ou sem filtro)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   nome:
+ *                     type: string
+ *                   username:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   tipo_conta:
+ *                     type: string
+ *                   foto_perfil:
+ *                     type: string
+ *                   descricao:
+ *                     type: string
+ *                   especializacoes:
+ *                     type: string
+ *       500:
+ *         description: Erro interno ao buscar os usuários
  */
 router.get('/user', UserController.getAllUsers);
 

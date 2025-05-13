@@ -1,11 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
-
 const postController = require("../controllers/postController");
-
 const upload = require("../config/upload.js");
-
 const apiKeyMiddleware = require("../config/apiKey"); // 🔐
 
 router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
@@ -21,11 +17,40 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  * @swagger
  * /api/post:
  *   get:
- *     summary: Lista todos os posts
+ *     summary: Lista todos os posts com possibilidade de filtrar pelo conteúdo
  *     tags: [Posts]
+ *     parameters:
+ *       - in: query
+ *         name: conteudo_post
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Filtro para buscar posts que contêm um texto específico no conteúdo
  *     responses:
  *       200:
- *         description: Lista de posts
+ *         description: Lista de posts (com ou sem filtro)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   house_id:
+ *                     type: integer
+ *                   conteudo_post:
+ *                     type: string
+ *                   foto:
+ *                     type: string
+ *                   data_publicacao:
+ *                     type: string
+ *                     format: date-time
+ *       500:
+ *         description: Erro interno ao buscar os posts
  */
 router.get("/post", postController.getAllPosts);
 
