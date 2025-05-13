@@ -39,10 +39,7 @@ const deleteComment = async (id) => {
 const updateComment = async (id, data) => {
     const { conteudo_comentario, anexo, data_publicacao } = data;
     const result = await pool.query(
-        `UPDATE comentarios 
-         SET conteudo_comentario = $1, anexo = $2, data_publicacao = $3 
-         WHERE id_comentario = $4 
-         RETURNING *`,
+        `UPDATE comentarios SET conteudo_comentario = $1, anexo = $2, data_publicacao = $3 WHERE id_comentario = $4 RETURNING *`,
         [conteudo_comentario, anexo, data_publicacao, id]
     );
     return result.rows[0];

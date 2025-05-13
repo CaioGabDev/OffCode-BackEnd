@@ -40,13 +40,18 @@ const updateLike = async (req, res) => {
     try {
         const { id_usuario, id_comentario, id_post, quantidade_curtidas } = req.body;
         const like = await LikeModel.updateLikes(id_usuario, id_comentario, id_post, quantidade_curtidas);
-        res.status(201).json(like);
-    }
-    catch (error) {
+
+        if (!like) {
+            return res.status(404).json({ message: "Curtida não encontrada para atualizar." });
+        }
+
+        res.status(200).json(like);
+    } catch (error) {
+        console.error('Erro ao atualizar a curtida:', error);
         res.status(500).json({ message: "Erro ao atualizar a curtida." });
     }
-}   
-
+};
+ 
 const getLikeById = async (req, res) => {
     const { id } = req.params;
     try {

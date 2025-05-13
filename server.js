@@ -6,6 +6,7 @@ const userRoutes = require("./src/routes/userRoutes");
 const likeRoutes = require("./src/routes/likeRoutes");
 const postRoutes = require("./src/routes/postRoutes");
 const commentRoutes = require("./src/routes/commentRoutes");
+const reportRoutes = require("./src/routes/reportRoutes");
 const setupSwagger = require('./src/config/swagger');
 const upload = require("./src/config/upload");
 const path = require("path");
@@ -29,6 +30,7 @@ app.use("/api", userRoutes);
 app.use("/api", likeRoutes );
 app.use("/api", postRoutes);
 app.use("/api", commentRoutes);
+app.use("/api", reportRoutes);
 
 
 const PORT = process.env.PORT || 3000;
