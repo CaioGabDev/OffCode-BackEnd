@@ -31,6 +31,7 @@ const createLike = async (req, res) => {
         const like = await LikeModel.createLikes(id_usuario, id_comentario, id_post, quantidade_curtidas);
         res.status(201).json(like);
     } catch (error) {
+        console.error('Erro ao criar o comentário:', error);
         res.status(500).json({ message: "Erro ao criar a curtida." });
     }
 }
@@ -50,13 +51,17 @@ const getLikeById = async (req, res) => {
     const { id } = req.params;
     try {
         const like = await LikeModel.getLikesById(id);
-        if (!like) {
+
+        if (!like || (Array.isArray(like) && like.length === 0)) {
             return res.status(404).json({ error: 'Curtida não encontrada.' });
         }
+
         res.json(like);
     } catch (error) {
+        console.error('Erro ao buscar curtida:', error);
         res.status(500).json({ error: 'Erro ao buscar curtida.' });
     }
-}
+};
+
 
 module.exports = {getAllLikes, deleteLike, createLike, updateLike, getLikeById};

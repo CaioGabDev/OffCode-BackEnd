@@ -50,12 +50,14 @@ const updateComment = async (req, res) => {
 
 const createComment = async (req, res) => {
     try {
-        const { id_usuario, id_post, conteudo_comentario, anexo, data_publicacao } = req.body;
+        const { id_usuario, id_post, conteudo_comentario, data_publicacao } = req.body;
+        const anexo = req.file ? req.file.filename : null;
         const comment = await CommentModel.createComment(
             id_usuario, id_post, conteudo_comentario, anexo, data_publicacao
         );
         res.status(201).json(comment);
     } catch (error) {
+        console.error('Erro ao criar o comentário:', error);
         res.status(500).json({ message: 'Erro ao criar o comentário.' });
     }
 };

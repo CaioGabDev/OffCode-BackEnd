@@ -6,11 +6,21 @@ const getComments = async (conteudo_comentario) => {
             "SELECT * FROM comentarios WHERE conteudo_comentario ILIKE $1",
             [`%${conteudo_comentario}%`]
         );
+        
+        if (result.rows.length === 0) {
+            return { message: 'Nenhum comentário encontrado com esse conteúdo.' };
+        }
+        
         return result.rows;
-} else {
+    } else {
         const result = await pool.query("SELECT * FROM comentarios");
+        
+        if (result.rows.length === 0) {
+            return { message: 'Nenhum comentário encontrado.' };
+        }
+
         return result.rows;
-}
+    }
 };
 
 const getCommentById = async (id) => {

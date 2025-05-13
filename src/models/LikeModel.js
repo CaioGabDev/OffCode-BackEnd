@@ -15,12 +15,12 @@ const getLikes = async (id_usuario) => {
 };
 
 const getLikesById = async (id) => {
-    const result = await pool.query("SELECT * FROM curtidas WHERE id_curtidas = $1", [id]);
+    const result = await pool.query("SELECT * FROM curtidas WHERE id_curtida = $1", [id]);
     return result.rows[0];
 };
 
 const deleteLikes = async (id) => {
-    const result = await pool.query("DELETE FROM curtidas WHERE id_curtidas = $1 RETURNING *", [id]);
+    const result = await pool.query("DELETE FROM curtidas WHERE id_curtida = $1 RETURNING *", [id]);
 
     if (result.rowCount === 0) {
         return { error: "Usuário não encontrado." };
@@ -34,7 +34,10 @@ const updateLikes = async (id_usuario, id_comentario, id_post, quantidade_curtid
 };
 
 const createLikes = async (id_usuario, id_comentario, id_post, quantidade_curtidas ) => {
-    const result = await pool.query("INSERT INTO curtidas VALUES ($1, $2, $3, $4) RETURNING *", [id_usuario, id_comentario, id_post, quantidade_curtidas]);
+    const result = await pool.query(
+        `INSERT INTO curtidas (id_usuario, id_comentario, id_post, quantidade_curtidas) VALUES ($1, $2, $3, $4) RETURNING *`,
+        [id_usuario, id_comentario, id_post, quantidade_curtidas]
+    );
     return result.rows[0];
 };
 

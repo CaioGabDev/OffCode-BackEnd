@@ -7,6 +7,7 @@ const likeRoutes = require("./src/routes/likeRoutes");
 const postRoutes = require("./src/routes/postRoutes");
 const commentRoutes = require("./src/routes/commentRoutes");
 const setupSwagger = require('./src/config/swagger');
+const upload = require("./src/config/upload");
 const path = require("path");
 
 
@@ -18,6 +19,12 @@ app.use(express.json());
 setupSwagger(app);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.post('/uploads', upload.single("anexo"), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: "Nenhum arquivo enviado." });
+    }
+    res.status(200).json({ message: "Arquivo enviado com sucesso", file: req.file });
+});
 app.use("/api", userRoutes);
 app.use("/api", likeRoutes );
 app.use("/api", postRoutes);

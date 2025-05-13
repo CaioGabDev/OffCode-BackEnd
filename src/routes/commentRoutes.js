@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const commentController = require("../controllers/commentController.js");
+const upload = require("../config/upload.js");
 
 /**
  * @swagger
@@ -119,7 +120,7 @@ router.get("/comments/:id", commentController.getCommentById);
  *       500:
  *         description: Erro ao criar o comentário
  */
-router.post("/comments", commentController.createComment);
+router.post("/comments",upload.single("anexo"), commentController.createComment);
 
 
 /**
