@@ -12,38 +12,6 @@ const upload = require("../config/upload.js");
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Comment:
- *       type: object
- *       required:
- *         - id_usuario
- *         - id_post
- *         - conteudo_comentario
- *       properties:
- *         id:
- *           type: integer
- *           description: ID único do comentário
- *         id_usuario:
- *           type: integer
- *           description: ID do usuário que fez o comentário
- *         id_post:
- *           type: integer
- *           description: ID do post onde o comentário foi feito
- *         conteudo_comentario:
- *           type: string
- *           description: Conteúdo do comentário
- *         anexo:
- *           type: string
- *           description: Anexo relacionado ao comentário (opcional)
- *         data_publicacao:
- *           type: string
- *           format: date-time
- *           description: Data de publicação do comentário
- */
-
-/**
- * @swagger
  * /api/comments:
  *   get:
  *     summary: Lista todos os comentários com possibilidade de filtrar pelo conteúdo
@@ -63,7 +31,16 @@ const upload = require("../config/upload.js");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Comment'
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   id_usuario:
+ *                     type: integer
+ *                   id_post:
+ *                     type: integer
+ *                   conteudo_comentario:
+ *                     type: string
  *       500:
  *         description: Erro interno ao buscar os comentários
  */
@@ -88,7 +65,16 @@ router.get("/comments", commentController.getAllComments);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Comment'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 id_post:
+ *                   type: integer
+ *                 conteudo_comentario:
+ *                   type: string
  *       404:
  *         description: Comentário não encontrado
  *       500:
@@ -107,21 +93,36 @@ router.get("/comments/:id", commentController.getCommentById);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Comment'
+ *             type: object
+ *             properties:
+ *               id_usuario:
+ *                 type: integer
+ *               id_post:
+ *                 type: integer
+ *               conteudo_comentario:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Comentário criado
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Comment'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 id_post:
+ *                   type: integer
+ *                 conteudo_comentario:
+ *                   type: string
  *       400:
  *         description: Dados inválidos
  *       500:
  *         description: Erro ao criar o comentário
  */
 router.post("/comments",upload.single("anexo"), commentController.createComment);
-
 
 /**
  * @swagger
@@ -141,14 +142,30 @@ router.post("/comments",upload.single("anexo"), commentController.createComment)
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Comment'
+ *             type: object
+ *             properties:
+ *               id_usuario:
+ *                 type: integer
+ *               id_post:
+ *                 type: integer
+ *               conteudo_comentario:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Comentário atualizado com sucesso
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Comment'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 id_post:
+ *                   type: integer
+ *                 conteudo_comentario:
+ *                   type: string
  *       400:
  *         description: Dados inválidos
  *       404:
