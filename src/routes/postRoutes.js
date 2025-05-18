@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const postController = require("../controllers/postController");
-const upload = require("../config/upload.js");
-const apiKeyMiddleware = require("../config/apiKey"); // 🔐
+const upload = require('../config/upload');
+const apiKeyMiddleware = require("../config/apiKey");
 
-router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
+// Protege todas as rotas com middleware de API Key
+router.use(apiKeyMiddleware);
 
 /**
  * @swagger
@@ -25,10 +26,10 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  *         required: false
  *         schema:
  *           type: string
- *         description: Filtro para buscar posts que contêm um texto específico no conteúdo
+ *         description: Filtro para buscar posts que contêm um texto específico
  *     responses:
  *       200:
- *         description: Lista de posts (com ou sem filtro)
+ *         description: Lista de posts
  *         content:
  *           application/json:
  *             schema:
@@ -36,21 +37,18 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  *               items:
  *                 type: object
  *                 properties:
- *                   id:
+ *                   id_post:
  *                     type: integer
- *                   name:
- *                     type: string
- *                   house_id:
+ *                   id_usuario:
  *                     type: integer
  *                   conteudo_post:
  *                     type: string
- *                   foto:
+ *                   anexo_url:
  *                     type: string
- *                   data_publicacao:
+ *                     format: uri
+ *                   data_criacao:
  *                     type: string
  *                     format: date-time
- *       500:
- *         description: Erro interno ao buscar os posts
  */
 router.get("/post", postController.getAllPosts);
 
@@ -69,6 +67,23 @@ router.get("/post", postController.getAllPosts);
  *     responses:
  *       200:
  *         description: Post encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id_post:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 conteudo_post:
+ *                   type: string
+ *                 anexo_url:
+ *                   type: string
+ *                   format: uri
+ *                 data_criacao:
+ *                   type: string
+ *                   format: date-time
  *       404:
  *         description: Post não encontrado
  */
@@ -86,17 +101,40 @@ router.get("/post/:id", postController.getById);
  *         multipart/form-data:
  *           schema:
  *             type: object
+ *             required:
+ *               - id_usuario
+ *               - conteudo_post
  *             properties:
- *               name:
- *                 type: string
- *               house_id:
+ *               id_usuario:
  *                 type: integer
- *               photo:
+ *                 description: ID do usuário que cria o post
+ *               conteudo_post:
+ *                 type: string
+ *                 description: Texto do post
+ *               anexo:
  *                 type: string
  *                 format: binary
+ *                 description: Arquivo anexo opcional
  *     responses:
  *       201:
- *         description: Post criado com sucesso!
+ *         description: Post criado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id_post:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 conteudo_post:
+ *                   type: string
+ *                 anexo_url:
+ *                   type: string
+ *                   format: uri
+ *                 data_criacao:
+ *                   type: string
+ *                   format: date-time
  */
 router.post("/post", upload.single("anexo"), postController.createPost);
 
@@ -115,19 +153,40 @@ router.post("/post", upload.single("anexo"), postController.createPost);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               conteudo_post:
  *                 type: string
- *               house_id:
- *                 type: integer
+ *               anexo:
+ *                 type: string
+ *                 format: binary
+ *                 description: Arquivo anexo opcional para atualizar
  *     responses:
  *       200:
- *         description: Post atualizado com sucesso!
+ *         description: Post atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id_post:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 conteudo_post:
+ *                   type: string
+ *                 anexo_url:
+ *                   type: string
+ *                   format: uri
+ *                 data_atualizacao:
+ *                   type: string
+ *                   format: date-time
+ *       404:
+ *         description: Post não encontrado
  */
-router.put("/post/:id", postController.updatePost);
+router.put("/post/:id", upload.single("anexo"), postController.updatePost);
 
 /**
  * @swagger
@@ -143,7 +202,9 @@ router.put("/post/:id", postController.updatePost);
  *           type: integer
  *     responses:
  *       200:
- *         description: Post deletado com sucesso!
+ *         description: Post deletado com sucesso
+ *       404:
+ *         description: Post não encontrado
  */
 router.delete("/post/:id", postController.deletePost);
 

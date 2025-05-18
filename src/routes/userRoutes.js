@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/userController');
-const upload = require("../config/upload.js");
-const apiKeyMiddleware = require("../config/apiKey"); // 🔐
+const upload = require('../config/upload');
+const apiKeyMiddleware = require("../config/apiKey");
 
-router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
+router.use(apiKeyMiddleware);
 
 /**
  * @swagger
  * tags:
  *   name: Users
- *   description: Gerenciamento de usuarios
+ *   description: Gerenciamento de usuários
  */
 
 /**
@@ -48,10 +48,16 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  *                     type: string
  *                   foto_perfil:
  *                     type: string
+ *                     nullable: true
+ *                   foto_capa:
+ *                     type: string
+ *                     nullable: true
  *                   descricao:
  *                     type: string
+ *                     nullable: true
  *                   especializacoes:
  *                     type: string
+ *                     nullable: true
  *       500:
  *         description: Erro interno ao buscar os usuários
  */
@@ -61,7 +67,7 @@ router.get('/user', UserController.getAllUsers);
  * @swagger
  * /api/user/{id}:
  *   get:
- *     summary: Buscar usuario por ID
+ *     summary: Buscar usuário por ID
  *     tags: [Users]
  *     parameters:
  *       - in: path
@@ -69,11 +75,39 @@ router.get('/user', UserController.getAllUsers);
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID do usuário
  *     responses:
  *       200:
- *         description: Usuario encontrado
+ *         description: Usuário encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 nome:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 tipo_conta:
+ *                   type: string
+ *                 foto_perfil:
+ *                   type: string
+ *                   nullable: true
+ *                 foto_capa:
+ *                   type: string
+ *                   nullable: true
+ *                 descricao:
+ *                   type: string
+ *                   nullable: true
+ *                 especializacoes:
+ *                   type: string
+ *                   nullable: true
  *       404:
- *         description: Usuario não encontrado
+ *         description: Usuário não encontrado
  */
 router.get('/user/:id', UserController.getUserById);
 
@@ -81,7 +115,7 @@ router.get('/user/:id', UserController.getUserById);
  * @swagger
  * /api/user:
  *   post:
- *     summary: Cria um novo usuario
+ *     summary: Cria um novo usuário
  *     tags: [Users]
  *     requestBody:
  *       required: true
@@ -103,22 +137,36 @@ router.get('/user/:id', UserController.getUserById);
  *               foto_perfil:
  *                 type: string
  *                 format: binary
+ *                 nullable: true
+ *               foto_capa:
+ *                 type: string
+ *                 format: binary
+ *                 nullable: true
  *               descricao:
  *                 type: string
+ *                 nullable: true
  *               especializacoes:
  *                 type: string
+ *                 nullable: true
  *     responses:
  *       201:
- *         description: Usuario criado
+ *         description: Usuário criado
  */
-router.post('/user', upload.single("foto_perfil"), UserController.createUser);
+router.post('/user', upload.fields([{ name: "foto_perfil", maxCount: 1 }, { name: "foto_capa", maxCount: 1 }]), UserController.createUser);
 
 /**
  * @swagger
  * /api/user/{id}:
  *   put:
- *     summary: Atualiza um usuario
+ *     summary: Atualiza um usuário
  *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do usuário a ser atualizado
  *     requestBody:
  *       required: true
  *       content:
@@ -128,42 +176,55 @@ router.post('/user', upload.single("foto_perfil"), UserController.createUser);
  *             properties:
  *               nome:
  *                 type: string
+ *                 nullable: true
  *               username:
  *                 type: string
+ *                 nullable: true
  *               email:
  *                 type: string
+ *                 nullable: true
  *               senha:
  *                 type: string
+ *                 nullable: true
  *               tipo_conta:
  *                 type: string
+ *                 nullable: true
  *               foto_perfil:
  *                 type: string
  *                 format: binary
+ *                 nullable: true
+ *               foto_capa:
+ *                 type: string
+ *                 format: binary
+ *                 nullable: true
  *               descricao:
  *                 type: string
+ *                 nullable: true
  *               especializacoes:
  *                 type: string
+ *                 nullable: true
  *     responses:
  *       200:
- *         description: Usuario atualizado
+ *         description: Usuário atualizado
  */
-router.put('/user/:id', UserController.updateUser);
+router.put('/user/:id', upload.fields([{ name: "foto_perfil", maxCount: 1 }, { name: "foto_capa", maxCount: 1 }]), UserController.updateUser);
 
 /**
  * @swagger
  * /api/user/{id}:
  *   delete:
- *     summary: Deleta um usuario
+ *     summary: Deleta um usuário
  *     tags: [Users]
  *     parameters:
  *       - in: path
- *         name: id_usuario
+ *         name: id
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID do usuário a ser deletado
  *     responses:
  *       200:
- *         description: Usuario deletado
+ *         description: Usuário deletado
  */
 router.delete('/user/:id', UserController.deleteUser);
 

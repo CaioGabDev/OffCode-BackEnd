@@ -33,7 +33,7 @@ const upload = require("../config/upload.js");
  *               items:
  *                 type: object
  *                 properties:
- *                   id:
+ *                   id_comentario:
  *                     type: integer
  *                   id_usuario:
  *                     type: integer
@@ -41,6 +41,13 @@ const upload = require("../config/upload.js");
  *                     type: integer
  *                   conteudo_comentario:
  *                     type: string
+ *                   anexo:
+ *                     type: string
+ *                     nullable: true
+ *                     description: Anexo opcional (imagem, arquivo, etc)
+ *                   data_publicacao:
+ *                     type: string
+ *                     format: date
  *       500:
  *         description: Erro interno ao buscar os comentários
  */
@@ -67,7 +74,7 @@ router.get("/comments", commentController.getAllComments);
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                 id_comentario:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
@@ -75,6 +82,12 @@ router.get("/comments", commentController.getAllComments);
  *                   type: integer
  *                 conteudo_comentario:
  *                   type: string
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date
  *       404:
  *         description: Comentário não encontrado
  *       500:
@@ -91,7 +104,7 @@ router.get("/comments/:id", commentController.getCommentById);
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -101,6 +114,10 @@ router.get("/comments/:id", commentController.getCommentById);
  *                 type: integer
  *               conteudo_comentario:
  *                 type: string
+ *               anexo:
+ *                 type: string
+ *                 format: binary
+ *                 description: Anexo opcional
  *     responses:
  *       201:
  *         description: Comentário criado
@@ -109,7 +126,7 @@ router.get("/comments/:id", commentController.getCommentById);
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                 id_comentario:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
@@ -117,12 +134,18 @@ router.get("/comments/:id", commentController.getCommentById);
  *                   type: integer
  *                 conteudo_comentario:
  *                   type: string
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date
  *       400:
  *         description: Dados inválidos
  *       500:
  *         description: Erro ao criar o comentário
  */
-router.post("/comments",upload.single("anexo"), commentController.createComment);
+router.post("/comments", upload.single("anexo"), commentController.createComment);
 
 /**
  * @swagger
@@ -140,7 +163,7 @@ router.post("/comments",upload.single("anexo"), commentController.createComment)
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -150,6 +173,10 @@ router.post("/comments",upload.single("anexo"), commentController.createComment)
  *                 type: integer
  *               conteudo_comentario:
  *                 type: string
+ *               anexo:
+ *                 type: string
+ *                 format: binary
+ *                 description: Anexo opcional
  *     responses:
  *       200:
  *         description: Comentário atualizado com sucesso
@@ -158,7 +185,7 @@ router.post("/comments",upload.single("anexo"), commentController.createComment)
  *             schema:
  *               type: object
  *               properties:
- *                 id:
+ *                 id_comentario:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
@@ -166,6 +193,12 @@ router.post("/comments",upload.single("anexo"), commentController.createComment)
  *                   type: integer
  *                 conteudo_comentario:
  *                   type: string
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date
  *       400:
  *         description: Dados inválidos
  *       404:
@@ -173,7 +206,7 @@ router.post("/comments",upload.single("anexo"), commentController.createComment)
  *       500:
  *         description: Erro ao atualizar o comentário
  */
-router.put("/comments/:id", commentController.updateComment);
+router.put("/comments/:id", upload.single("anexo"), commentController.updateComment);
 
 /**
  * @swagger
@@ -197,5 +230,6 @@ router.put("/comments/:id", commentController.updateComment);
  *         description: Erro ao deletar o comentário
  */
 router.delete("/comments/:id", commentController.deleteComment);
+
 
 module.exports = router;
