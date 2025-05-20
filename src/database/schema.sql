@@ -16,12 +16,12 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios (nome, username, email, senha, tipo_conta, foto_perfil, foto_capa, descricao, especializacoes) VALUES 
-('Ana Carolina Garcia Freitas', '@AnaCarolinaFreitas', 'ana.c.freitas35@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210617?v=4', NULL, NULL, NULL),
-('Ana Julia Pinheiro Demattei', '@anajudemattei', 'ana.demattei@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210311?v=4', NULL, NULL, NULL),
-('Beatriz Lima', '@limabea23', 'beatriz.lima14@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210831?v=4', NULL, NULL, NULL),
-('Bernardo Gabriel de Moraes Marques', '@Bernardo1401', 'bernardo.g.marques@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158209610?v=4', NULL, NULL, NULL),
-('Caio Gabriel Lacerda Silva', '@CaioLacerdaDev', 'caio.g.silva20@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210310?v=4', NULL, NULL, NULL),
-('Luana Domeneghetti', '@domeneghetti', 'luana.domeneghetti@aluno.senai.br', '1234', 'Pessoal', 'https://avatars.githubusercontent.com/u/158210063?v=4', NULL, NULL, NULL);
+('Ana Carolina Garcia Freitas', '@AnaCarolinaFreitas', 'ana.c.freitas35@aluno.senai.br', '1234', 'Pessoal', 'uploads/anacarolina', NULL, NULL, NULL),
+('Ana Julia Pinheiro Demattei', '@anajudemattei', 'ana.demattei@aluno.senai.br', '1234', 'Pessoal', 'uploads/anademattei', NULL, NULL, NULL),
+('Beatriz Lima', '@limabea23', 'beatriz.lima14@aluno.senai.br', '1234', 'Pessoal', 'uploads/', NULL, NULL, NULL),
+('Bernardo Gabriel de Moraes Marques', '@Bernardo1401', 'bernardo.g.marques@aluno.senai.br', '1234', 'Pessoal', 'uploads/bernardo', NULL, NULL, NULL),
+('Caio Gabriel Lacerda Silva', '@CaioLacerdaDev', 'caio.g.silva20@aluno.senai.br', '1234', 'Pessoal', 'uploads/caio.jpg', NULL, NULL, NULL),
+('Luana Domeneghetti', '@domeneghetti', 'luana.domeneghetti@aluno.senai.br', '1234', 'Pessoal', 'uploads/luana.jpg', NULL, NULL, NULL);
 
 CREATE TABLE posts (
     id_post SERIAL PRIMARY KEY,
