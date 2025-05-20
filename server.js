@@ -11,6 +11,7 @@ const commentRoutes = require("./src/routes/commentRoutes");
 const reportRoutes = require("./src/routes/reportRoutes");
 const setupSwagger = require('./src/config/swagger');
 const upload = require("./src/config/upload");
+const duvidaRoutes = require("./src/routes/duvidaRoutes");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/api", likeRoutes);
 app.use("/api", postRoutes);
 app.use("/api", commentRoutes);
 app.use("/api", reportRoutes);
+app.use("/api", duvidaRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
