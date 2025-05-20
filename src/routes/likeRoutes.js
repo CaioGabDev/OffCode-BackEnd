@@ -1,33 +1,31 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const likeController = require("../controllers/likeController");
-const apiKeyMiddleware = require("../config/apiKey"); // 🔐
-
-router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
+const commentController = require("../controllers/commentController.js");
+const upload = require("../config/upload.js");
 
 /**
  * @swagger
  * tags:
- *   name: Likes
- *   description: Gerenciamento de curtidas (likes)
+ *   name: Comments
+ *   description: Gerenciamento de comentários
  */
 
 /**
  * @swagger
- * /api/like:
+ * /api/comments:
  *   get:
- *     summary: Lista todas as curtidas com possibilidade de filtrar pelo ID do usuário
- *     tags: [Likes]
+ *     summary: Lista todos os comentários com possibilidade de filtrar pelo conteúdo
+ *     tags: [Comments]
  *     parameters:
  *       - in: query
- *         name: id_usuario
+ *         name: conteudo_comentario
  *         required: false
  *         schema:
- *           type: integer
- *         description: Filtro para buscar curtidas feitas por um usuário específico
+ *           type: string
+ *         description: Filtro para buscar comentários que contêm o texto especificado
  *     responses:
  *       200:
- *         description: Lista de curtidas (com ou sem filtro)
+ *         description: Lista de comentários (com ou sem filtro)
  *         content:
  *           application/json:
  *             schema:
@@ -35,182 +33,78 @@ router.use(apiKeyMiddleware); // 🔒 Protege todas as rotas
  *               items:
  *                 type: object
  *                 properties:
- *                   id_curtida:
+ *                   id_comentario:
  *                     type: integer
  *                   id_usuario:
  *                     type: integer
  *                   id_post:
  *                     type: integer
- *                   data_curtida:
+ *                   conteudo_comentario:
  *                     type: string
- *                     format: date-time
+ *                   anexo:
+ *                     type: string
+ *                     nullable: true
+ *                     description: Anexo opcional (imagem, arquivo, etc)
+ *                   data_publicacao:
+ *                     type: string
+ *                     format: date
  *       500:
- *         description: Erro interno ao buscar as curtidas
+ *         description: Erro interno ao buscar os comentários
  */
-router.get("/like", likeController.getAllLikes);
+router.get("/comments", commentController.getAllComments);
 
 /**
  * @swagger
- * /api/like:
- *   post:
- *     summary: Cria uma nova curtida em um post ou comentário
- *     tags: [Likes]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - id_usuario
- *             properties:
- *               id_usuario:
- *                 type: integer
- *                 description: ID do usuário que curtiu
- *               id_post:
- *                 type: integer
- *                 nullable: true
- *                 description: ID do post curtido (obrigatório se id_comentario não for enviado)
- *               id_comentario:
- *                 type: integer
- *                 nullable: true
- *                 description: ID do comentário curtido (obrigatório se id_post não for enviado)
+ * /api/comments/{id}:
+ *   get:
+ *     summary: Busca comentário por ID
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do comentário a ser buscado
  *     responses:
- *       201:
- *         description: Curtida criada com sucesso
+ *       200:
+ *         description: Comentário encontrado
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id_curtida:
- *                   type: integer
- *                 id_usuario:
- *                   type: integer
- *                 id_post:
- *                   type: integer
- *                   nullable: true
  *                 id_comentario:
  *                   type: integer
- *                   nullable: true
- *       400:
- *         description: Dados inválidos ou ausentes (é necessário informar id_post ou id_comentario)
- *       500:
- *         description: Erro interno ao criar a curtida
- */
-router.post("/like", likeController.createLike);
-
-
-/**
- * @swagger
- * /api/like/{id}:
- *   get:
- *     summary: Busca uma curtida por ID
- *     tags: [Likes]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID da curtida a ser buscada
- *     responses:
- *       200:
- *         description: Curtida encontrada
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id_curtida:
- *                   type: integer
  *                 id_usuario:
  *                   type: integer
  *                 id_post:
  *                   type: integer
- *                 data_curtida:
+ *                 conteudo_comentario:
  *                   type: string
- *                   format: date-time
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date
  *       404:
- *         description: Curtida não encontrada
+ *         description: Comentário não encontrado
  *       500:
- *         description: Erro interno ao buscar a curtida
+ *         description: Erro interno ao buscar o comentário
  */
-router.get("/like/:id", likeController.getLikeById);
+router.get("/comments/:id", commentController.getCommentById);
 
 /**
  * @swagger
- * /api/like/count/post/{id_post}:
- *   get:
- *     summary: Retorna a quantidade de curtidas de um post
- *     tags: [Likes]
- *     parameters:
- *       - in: path
- *         name: id_post
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID do post a ser consultado
- *     responses:
- *       200:
- *         description: Quantidade de curtidas retornada com sucesso (0 se não houver curtidas)
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 total_curtidas:
- *                   type: integer
- *       500:
- *         description: Erro interno ao contar curtidas
- */
-router.get("/count/post/:id_post", likeController.getLikeCountByPost);
-
-/**
- * @swagger
- * /api/like/count/comentario/{id_comentario}:
- *   get:
- *     summary: Conta o número de curtidas de um comentário
- *     tags: [Likes]
- *     parameters:
- *       - in: path
- *         name: id_comentario
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID do comentário
- *     responses:
- *       200:
- *         description: Número total de curtidas retornado com sucesso (0 se nenhuma curtida)
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 total_curtidas:
- *                   type: integer
- *       500:
- *         description: Erro ao buscar curtidas
- */
-router.get("/count/comentario/:id_comentario", likeController.getLikeCountByCommentId);
-
-/**
- * @swagger
- * /api/like/{id}:
- *   put:
- *     summary: Atualiza uma curtida
- *     tags: [Likes]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID da curtida a ser atualizada
+ * /api/comments:
+ *   post:
+ *     summary: Cria um novo comentário
+ *     tags: [Comments]
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -218,56 +112,124 @@ router.get("/count/comentario/:id_comentario", likeController.getLikeCountByComm
  *                 type: integer
  *               id_post:
  *                 type: integer
- *               data_curtida:
+ *               conteudo_comentario:
  *                 type: string
- *                 format: date-time
+ *               anexo:
+ *                 type: string
+ *                 format: binary
+ *                 description: Anexo opcional
  *     responses:
- *       200:
- *         description: Curtida atualizada com sucesso
+ *       201:
+ *         description: Comentário criado
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id_curtida:
+ *                 id_comentario:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
  *                 id_post:
  *                   type: integer
- *                 data_curtida:
+ *                 conteudo_comentario:
  *                   type: string
- *                   format: date-time
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date
+ *       400:
+ *         description: Dados inválidos
+ *       500:
+ *         description: Erro ao criar o comentário
+ */
+router.post("/comments", upload.single("anexo"), commentController.createComment);
+
+/**
+ * @swagger
+ * /api/comments/{id}:
+ *   put:
+ *     summary: Atualiza um comentário
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do comentário a ser atualizado
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id_usuario:
+ *                 type: integer
+ *               id_post:
+ *                 type: integer
+ *               conteudo_comentario:
+ *                 type: string
+ *               anexo:
+ *                 type: string
+ *                 format: binary
+ *                 description: Anexo opcional
+ *     responses:
+ *       200:
+ *         description: Comentário atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id_comentario:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 id_post:
+ *                   type: integer
+ *                 conteudo_comentario:
+ *                   type: string
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date
  *       400:
  *         description: Dados inválidos
  *       404:
- *         description: Curtida não encontrada
+ *         description: Comentário não encontrado
  *       500:
- *         description: Erro ao atualizar a curtida
+ *         description: Erro ao atualizar o comentário
  */
-router.put("/like/:id", likeController.updateLike);
+router.put("/comments/:id", upload.single("anexo"), commentController.updateComment);
 
 /**
  * @swagger
- * /api/like/{id}:
+ * /api/comments/{id}:
  *   delete:
- *     summary: Deleta uma curtida
- *     tags: [Likes]
+ *     summary: Deleta um comentário
+ *     tags: [Comments]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID da curtida a ser deletada
+ *         description: ID do comentário a ser deletado
  *     responses:
  *       200:
- *         description: Curtida deletada com sucesso
+ *         description: Comentário deletado com sucesso
  *       404:
- *         description: Curtida não encontrada
+ *         description: Comentário não encontrado
  *       500:
- *         description: Erro ao deletar a curtida
+ *         description: Erro ao deletar o comentário
  */
-router.delete("/like/:id", likeController.deleteLike);
+router.delete("/comments/:id", commentController.deleteComment);
+
 
 module.exports = router;
