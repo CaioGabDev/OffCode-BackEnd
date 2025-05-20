@@ -1,32 +1,34 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const postController = require("../controllers/postController");
-const upload = require('../config/upload');
-const apiKeyMiddleware = require("../config/apiKey");
-
-// Protege todas as rotas com middleware de API Key
-router.use(apiKeyMiddleware);
+const postController = require("../controllers/postController.js");
+const upload = require("../config/upload.js");
 
 /**
  * @swagger
  * tags:
  *   name: Posts
- *   description: Gerenciamento de posts
+ *   description: Gerenciamento de publicações (posts)
  */
 
 /**
  * @swagger
- * /api/post:
+ * /api/posts:
  *   get:
- *     summary: Lista todos os posts com possibilidade de filtrar pelo conteúdo
+ *     summary: Lista todos os posts com possibilidade de filtro por título ou conteúdo
  *     tags: [Posts]
  *     parameters:
  *       - in: query
- *         name: conteudo_post
+ *         name: titulo
  *         required: false
  *         schema:
  *           type: string
- *         description: Filtro para buscar posts que contêm um texto específico
+ *         description: Filtrar posts que contenham esse título
+ *       - in: query
+ *         name: conteudo
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Filtrar posts que contenham esse conteúdo
  *     responses:
  *       200:
  *         description: Lista de posts
@@ -41,22 +43,26 @@ router.use(apiKeyMiddleware);
  *                     type: integer
  *                   id_usuario:
  *                     type: integer
- *                   conteudo_post:
+ *                   titulo:
  *                     type: string
- *                   anexo_url:
+ *                   conteudo:
  *                     type: string
- *                     format: uri
- *                   data_criacao:
+ *                   anexo:
+ *                     type: string
+ *                     nullable: true
+ *                   data_publicacao:
  *                     type: string
  *                     format: date-time
+ *       500:
+ *         description: Erro interno ao buscar os posts
  */
-router.get("/post", postController.getAllPosts);
+router.get("/posts", postController.getAllPosts);
 
 /**
  * @swagger
- * /api/post/{id}:
+ * /api/posts/{id}:
  *   get:
- *     summary: Buscar um post por ID
+ *     summary: Busca um post por ID
  *     tags: [Posts]
  *     parameters:
  *       - in: path
@@ -64,6 +70,7 @@ router.get("/post", postController.getAllPosts);
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID do post a ser buscado
  *     responses:
  *       200:
  *         description: Post encontrado
@@ -76,24 +83,28 @@ router.get("/post", postController.getAllPosts);
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
- *                 conteudo_post:
+ *                 titulo:
  *                   type: string
- *                 anexo_url:
+ *                 conteudo:
  *                   type: string
- *                   format: uri
- *                 data_criacao:
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
  *                   type: string
  *                   format: date-time
  *       404:
  *         description: Post não encontrado
+ *       500:
+ *         description: Erro interno ao buscar o post
  */
-router.get("/post/:id", postController.getById);
+router.get("/posts/:id", postController.getById);
 
 /**
  * @swagger
- * /api/post:
+ * /api/posts:
  *   post:
- *     summary: Cria um novo Post
+ *     summary: Cria um novo post
  *     tags: [Posts]
  *     requestBody:
  *       required: true
@@ -101,20 +112,15 @@ router.get("/post/:id", postController.getById);
  *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - id_usuario
- *               - conteudo_post
  *             properties:
  *               id_usuario:
  *                 type: integer
- *                 description: ID do usuário que cria o post
  *               conteudo_post:
  *                 type: string
- *                 description: Texto do post
  *               anexo:
  *                 type: string
  *                 format: binary
- *                 description: Arquivo anexo opcional
+ *                 description: Anexo opcional (imagem, vídeo, etc)
  *     responses:
  *       201:
  *         description: Post criado com sucesso
@@ -129,20 +135,24 @@ router.get("/post/:id", postController.getById);
  *                   type: integer
  *                 conteudo_post:
  *                   type: string
- *                 anexo_url:
+ *                 anexo:
  *                   type: string
- *                   format: uri
- *                 data_criacao:
+ *                   nullable: true
+ *                 data_publicacao:
  *                   type: string
  *                   format: date-time
+ *       400:
+ *         description: Dados inválidos
+ *       500:
+ *         description: Erro ao criar o post
  */
-router.post("/post", upload.single("anexo"), postController.createPost);
+router.post("/posts", upload.single("anexo"), postController.createPost);
 
 /**
  * @swagger
- * /api/post/{id}:
+ * /api/posts/{id}:
  *   put:
- *     summary: Atualiza um post
+ *     summary: Atualiza um post existente
  *     tags: [Posts]
  *     parameters:
  *       - in: path
@@ -150,6 +160,7 @@ router.post("/post", upload.single("anexo"), postController.createPost);
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID do post a ser atualizado
  *     requestBody:
  *       required: true
  *       content:
@@ -157,12 +168,14 @@ router.post("/post", upload.single("anexo"), postController.createPost);
  *           schema:
  *             type: object
  *             properties:
+ *               id_usuario:
+ *                 type: integer
  *               conteudo_post:
  *                 type: string
  *               anexo:
  *                 type: string
  *                 format: binary
- *                 description: Arquivo anexo opcional para atualizar
+ *                 description: Novo anexo opcional
  *     responses:
  *       200:
  *         description: Post atualizado com sucesso
@@ -177,22 +190,26 @@ router.post("/post", upload.single("anexo"), postController.createPost);
  *                   type: integer
  *                 conteudo_post:
  *                   type: string
- *                 anexo_url:
+ *                 anexo:
  *                   type: string
- *                   format: uri
- *                 data_atualizacao:
+ *                   nullable: true
+ *                 data_publicacao:
  *                   type: string
  *                   format: date-time
+ *       400:
+ *         description: Dados inválidos
  *       404:
  *         description: Post não encontrado
+ *       500:
+ *         description: Erro ao atualizar o post
  */
-router.put("/post/:id", upload.single("anexo"), postController.updatePost);
+router.put("/posts/:id", upload.single("anexo"), postController.updatePost);
 
 /**
  * @swagger
- * /api/post/{id}:
+ * /api/posts/{id}:
  *   delete:
- *     summary: Deleta um post
+ *     summary: Remove um post
  *     tags: [Posts]
  *     parameters:
  *       - in: path
@@ -200,12 +217,16 @@ router.put("/post/:id", upload.single("anexo"), postController.updatePost);
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID do post a ser removido
  *     responses:
  *       200:
  *         description: Post deletado com sucesso
  *       404:
  *         description: Post não encontrado
+ *       500:
+ *         description: Erro ao deletar o post
  */
-router.delete("/post/:id", postController.deletePost);
+router.delete("/posts/:id", postController.deletePost);
+
 
 module.exports = router;
