@@ -40,6 +40,23 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (5, 'Qual linguagem você usa no back-end? Node, Go, Python, Java, outra? (e por quê?)', NULL, '2025-04-24'),
 (6, 'Eu tentando entender por que a API morreu às 3h17 da manhã 💀', 'https://miro.medium.com/v2/resize:fit:1400/1*Al1fMG4yFlw033208Bu3MA.png', '2025-04-24');
 
+CREATE TABLE duvidas (
+    id_post SERIAL PRIMARY KEY,
+    id_usuario INT NOT NULL, 
+    conteudo_duvida TEXT NOT NULL,
+    anexo TEXT, 
+    data_publicacao DATE,
+    CONSTRAINT fk_usuario_post FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
+INSERT INTO duvidas (id_usuario, conteudo_duvida, anexo, data_publicacao) VALUES
+(1, 'Como faço para melhorar a performance de uma query SQL complexa?', NULL, '2025-04-25'),
+(2, 'Alguém sabe como configurar um servidor Node.js para produção?', NULL, '2025-04-26'),
+(3, 'Qual a melhor prática para versionar um banco de dados?', NULL, '2025-04-27'),
+(4, 'Como lidar com conflitos de merge no Git?', NULL, '2025-04-28'),
+(5, 'Qual a diferença entre REST e GraphQL?', NULL, '2025-04-29'),
+(6, 'Como faço para debugar um erro intermitente em uma aplicação?', NULL, '2025-04-30');
+
 CREATE TABLE comentarios (
     id_comentario SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
