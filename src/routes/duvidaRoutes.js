@@ -1,31 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const commentController = require("../controllers/commentController.js");
+const duvidaController = require("../controllers/duvidaController.js");
 const upload = require("../config/upload.js");
 
 /**
  * @swagger
  * tags:
- *   name: Comments
- *   description: Gerenciamento de comentários
+ *   name: Duvidas
+ *   description: Gerenciamento de dúvidas
  */
 
 /**
  * @swagger
- * /api/comments:
+ * /api/duvidas:
  *   get:
- *     summary: Lista todos os comentários com possibilidade de filtrar pelo conteúdo
- *     tags: [Comments]
+ *     summary: Lista todas as dúvidas com possibilidade de filtrar pelo conteúdo
+ *     tags: [Duvidas]
  *     parameters:
  *       - in: query
- *         name: conteudo_comentario
+ *         name: conteudo_duvida
  *         required: false
  *         schema:
  *           type: string
- *         description: Filtro para buscar comentários que contêm o texto especificado
+ *         description: Filtro para buscar dúvidas que contêm o texto especificado
  *     responses:
  *       200:
- *         description: Lista de comentários (com ou sem filtro)
+ *         description: Lista de dúvidas (com ou sem filtro)
  *         content:
  *           application/json:
  *             schema:
@@ -33,13 +33,13 @@ const upload = require("../config/upload.js");
  *               items:
  *                 type: object
  *                 properties:
- *                   id_comentario:
+ *                   id_duvida:
  *                     type: integer
  *                   id_usuario:
  *                     type: integer
  *                   id_post:
  *                     type: integer
- *                   conteudo_comentario:
+ *                   conteudo_duvida:
  *                     type: string
  *                   anexo:
  *                     type: string
@@ -49,38 +49,38 @@ const upload = require("../config/upload.js");
  *                     type: string
  *                     format: date
  *       500:
- *         description: Erro interno ao buscar os comentários
+ *         description: Erro interno ao buscar as dúvidas
  */
-router.get("/comments", commentController.getAllComments);
+router.get("/duvidas", duvidaController.getAllDuvidas);
 
 /**
  * @swagger
- * /api/comments/{id}:
+ * /api/duvidas/{id}:
  *   get:
- *     summary: Busca comentário por ID
- *     tags: [Comments]
+ *     summary: Busca dúvida por ID
+ *     tags: [Duvidas]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID do comentário a ser buscado
+ *         description: ID da dúvida a ser buscada
  *     responses:
  *       200:
- *         description: Comentário encontrado
+ *         description: Dúvida encontrada
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id_comentario:
+ *                 id_duvida:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
  *                 id_post:
  *                   type: integer
- *                 conteudo_comentario:
+ *                 conteudo_duvida:
  *                   type: string
  *                 anexo:
  *                   type: string
@@ -89,18 +89,18 @@ router.get("/comments", commentController.getAllComments);
  *                   type: string
  *                   format: date
  *       404:
- *         description: Comentário não encontrado
+ *         description: Dúvida não encontrada
  *       500:
- *         description: Erro interno ao buscar o comentário
+ *         description: Erro interno ao buscar a dúvida
  */
-router.get("/comments/:id", commentController.getCommentById);
+router.get("/duvidas/:id", duvidaController.getById);
 
 /**
  * @swagger
- * /api/comments:
+ * /api/duvidas:
  *   post:
- *     summary: Cria um novo comentário
- *     tags: [Comments]
+ *     summary: Cria uma nova dúvida
+ *     tags: [Duvidas]
  *     requestBody:
  *       required: true
  *       content:
@@ -112,7 +112,7 @@ router.get("/comments/:id", commentController.getCommentById);
  *                 type: integer
  *               id_post:
  *                 type: integer
- *               conteudo_comentario:
+ *               conteudo_duvida:
  *                 type: string
  *               anexo:
  *                 type: string
@@ -120,19 +120,19 @@ router.get("/comments/:id", commentController.getCommentById);
  *                 description: Anexo opcional
  *     responses:
  *       201:
- *         description: Comentário criado
+ *         description: Dúvida criada
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id_comentario:
+ *                 id_duvida:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
  *                 id_post:
  *                   type: integer
- *                 conteudo_comentario:
+ *                 conteudo_duvida:
  *                   type: string
  *                 anexo:
  *                   type: string
@@ -143,23 +143,23 @@ router.get("/comments/:id", commentController.getCommentById);
  *       400:
  *         description: Dados inválidos
  *       500:
- *         description: Erro ao criar o comentário
+ *         description: Erro ao criar a dúvida
  */
-router.post("/comments", upload.single("anexo"), commentController.createComment);
+router.post("/duvidas", upload.single("anexo"), duvidaController.createDuvida);
 
 /**
  * @swagger
- * /api/comments/{id}:
+ * /api/duvidas/{id}:
  *   put:
- *     summary: Atualiza um comentário
- *     tags: [Comments]
+ *     summary: Atualiza uma dúvida
+ *     tags: [Duvidas]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID do comentário a ser atualizado
+ *         description: ID da dúvida a ser atualizada
  *     requestBody:
  *       required: true
  *       content:
@@ -171,7 +171,7 @@ router.post("/comments", upload.single("anexo"), commentController.createComment
  *                 type: integer
  *               id_post:
  *                 type: integer
- *               conteudo_comentario:
+ *               conteudo_duvida:
  *                 type: string
  *               anexo:
  *                 type: string
@@ -179,19 +179,19 @@ router.post("/comments", upload.single("anexo"), commentController.createComment
  *                 description: Anexo opcional
  *     responses:
  *       200:
- *         description: Comentário atualizado com sucesso
+ *         description: Dúvida atualizada com sucesso
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id_comentario:
+ *                 id_duvida:
  *                   type: integer
  *                 id_usuario:
  *                   type: integer
  *                 id_post:
  *                   type: integer
- *                 conteudo_comentario:
+ *                 conteudo_duvida:
  *                   type: string
  *                 anexo:
  *                   type: string
@@ -202,34 +202,33 @@ router.post("/comments", upload.single("anexo"), commentController.createComment
  *       400:
  *         description: Dados inválidos
  *       404:
- *         description: Comentário não encontrado
+ *         description: Dúvida não encontrada
  *       500:
- *         description: Erro ao atualizar o comentário
+ *         description: Erro ao atualizar a dúvida
  */
-router.put("/comments/:id", upload.single("anexo"), commentController.updateComment);
+router.put("/duvidas/:id", upload.single("anexo"), duvidaController.updateDuvida);
 
 /**
  * @swagger
- * /api/comments/{id}:
+ * /api/duvidas/{id}:
  *   delete:
- *     summary: Deleta um comentário
- *     tags: [Comments]
+ *     summary: Deleta uma dúvida
+ *     tags: [Duvidas]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID do comentário a ser deletado
+ *         description: ID da dúvida a ser deletada
  *     responses:
  *       200:
- *         description: Comentário deletado com sucesso
+ *         description: Dúvida deletada com sucesso
  *       404:
- *         description: Comentário não encontrado
+ *         description: Dúvida não encontrada
  *       500:
- *         description: Erro ao deletar o comentário
+ *         description: Erro ao deletar a dúvida
  */
-router.delete("/comments/:id", commentController.deleteComment);
-
+router.delete("/duvidas/:id", duvidaController.deleteDuvida);
 
 module.exports = router;

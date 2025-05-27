@@ -13,8 +13,8 @@ const getPosts = async (conteudo) => {
             SELECT posts.*, usuarios.nome AS usuario_nome 
             FROM posts 
             LEFT JOIN usuarios ON posts.id_usuario = usuarios.id_usuario 
-            WHERE posts.conteudo_post ILIKE $1`
-        , [`%${conteudo}%`]);
+            WHERE posts.conteudo_post ILIKE $1
+        `, [`%${conteudo}%`]);
         return result.rows;
     }
 };
@@ -26,7 +26,7 @@ const getPostById = async (id) => {
         LEFT JOIN usuarios ON posts.id_usuario = usuarios.id_usuario 
         WHERE posts.id_post = $1
     `, [id]);
-    return result.rows;
+    return result.rows[0];
 };
 
 const createPost = async (conteudo_post, anexo, id_usuario) => {
@@ -40,13 +40,18 @@ const createPost = async (conteudo_post, anexo, id_usuario) => {
 
 const updatePost = async (id_post, conteudo_post, anexo) => {
     const result = await pool.query(`
-        UPDATE posts SET conteudo_post = $1, anexo = $2 WHERE id_post = $3 RETURNING *`, [conteudo_post, anexo, id_post]);
+        UPDATE posts SET conteudo_post = $1, anexo = $2 
+        WHERE id_post = $3 
+        RETURNING *
+    `, [conteudo_post, anexo, id_post]);
     return result.rows[0];
 };
 
 const deletePost = async (id_post) => {
     const result = await pool.query(`
-        DELETE FROM posts WHERE id_post = $1 RETURNING *`, [id_post]);
+        DELETE FROM posts WHERE id_post = $1 
+        RETURNING *
+    `, [id_post]);
     if (result.rowCount === 0) {
         return { error: "Post não encontrado." };
     }
