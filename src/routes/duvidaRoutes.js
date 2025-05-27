@@ -93,7 +93,7 @@ router.get("/duvidas", duvidaController.getAllDuvidas);
  *       500:
  *         description: Erro interno ao buscar a dúvida
  */
-router.get("/duvidas/:id", duvidaController.getDuvidaById);
+router.get("/duvidas/:id", duvidaController.getById);
 
 /**
  * @swagger
