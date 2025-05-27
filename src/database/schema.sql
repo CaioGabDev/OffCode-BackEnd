@@ -32,6 +32,7 @@ CREATE TABLE posts (
     CONSTRAINT fk_usuario_post FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
+
 INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (1, 'Meu ritual antes de começar a codar...', 'https://i.pinimg.com/736x/01/ec/e5/01ece52b11d155f053f50a7a6293a6ce.jpg', '2025-04-24'),
 (2, 'Mostre seu layout mais bonito (ou mais caótico 😅)', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwufcE7pyPpNLayzb33eWmx2Jny71qRRyg3w&s', '2025-04-24'),
@@ -56,6 +57,8 @@ INSERT INTO duvidas (id_usuario, conteudo_duvida, anexo, data_publicacao) VALUES
 (4, 'Como lidar com conflitos de merge no Git?', NULL, '2025-04-28'),
 (5, 'Qual a diferença entre REST e GraphQL?', NULL, '2025-04-29'),
 (6, 'Como faço para debugar um erro intermitente em uma aplicação?', NULL, '2025-04-30');
+
+
 
 CREATE TABLE comentarios (
     id_comentario SERIAL PRIMARY KEY,
@@ -91,6 +94,17 @@ CREATE TABLE curtidas (
     )
 );
 
+
+
+
+INSERT INTO curtidas (id_usuario, id_post, id_comentario, quantidade_curtidas) VALUES 
+(1, 4, 2, 3), 
+(2, 3, 4, 1), 
+(3, 2, NULL, 5), 
+(4, 5, 3, 2), 
+(5, 1, NULL, 4), 
+(6, 2, 1, 7); 
+
 INSERT INTO curtidas (id_usuario, id_post, id_comentario) VALUES 
 (1, NULL, 2),
 (2, NULL, 4),
@@ -98,3 +112,4 @@ INSERT INTO curtidas (id_usuario, id_post, id_comentario) VALUES
 (4, NULL, 3),
 (5, 1, NULL),
 (6, NULL, 1);
+
