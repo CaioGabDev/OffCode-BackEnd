@@ -15,6 +15,8 @@ CREATE TABLE usuarios (
     especializacoes TEXT
 );
 
+
+//50
 INSERT INTO usuarios (nome, username, email, senha, tipo_conta, foto_perfil, foto_capa, descricao, especializacoes) VALUES 
 ('Ana Carolina', 'ana_carol', 'ana.carol@gmail.com', 'anacarol123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Front-end'),
 ('Ana Julia', 'ana_julia', 'ana.julia@gmail.com', 'anajulia123', 'Pessoal', 'https://avatars.githubusercontent.com', 'https://avatars.githubusercontent.com', 'Dev & Estudante no SESI e SENAI Valinhos', 'Front-end'),
@@ -32,6 +34,8 @@ CREATE TABLE posts (
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
+//150
+
 INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (1, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2023-06-14'),
 (2, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2024-12-30'),
@@ -40,6 +44,8 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (5, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2023-01-01'),
 (6, 'Lorem ipsum dolor sit amet.', 'https://avatars.githubusercontent.com', '2023-01-01');
 
+
+//1 a 2 por post, 300
 CREATE TABLE comentarios (
     id_comentario SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL, --FK
@@ -71,6 +77,8 @@ CREATE TABLE curtidas (
     CONSTRAINT fk_comentarios FOREIGN KEY (id_comentario) REFERENCES comentarios(id_comentario)
 );
 
+
+/ 5 curtidas por post, no caso 
 INSERT INTO curtidas (id_usuario, id_post, id_comentario, quantidade_curtidas) VALUES 
 (1, 4, 2, 3), 
 (2, 3, 4, 1), 
