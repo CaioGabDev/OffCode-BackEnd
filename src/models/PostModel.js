@@ -3,14 +3,14 @@ const pool = require("../config/database");
 const getPosts = async (conteudo) => {
     if (!conteudo) {
         const result = await pool.query(`
-            SELECT posts.*, usuarios.nome AS usuario_nome 
+            SELECT posts.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil 
             FROM posts 
             LEFT JOIN usuarios ON posts.id_usuario = usuarios.id_usuario
         `);
         return result.rows;
     } else {
         const result = await pool.query(`
-            SELECT posts.*, usuarios.nome AS usuario_nome 
+            SELECT posts.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil 
             FROM posts 
             LEFT JOIN usuarios ON posts.id_usuario = usuarios.id_usuario 
             WHERE posts.conteudo_post ILIKE $1
@@ -21,7 +21,7 @@ const getPosts = async (conteudo) => {
 
 const getPostById = async (id) => {
     const result = await pool.query(`
-        SELECT posts.*, usuarios.nome AS usuario_nome 
+        SELECT posts.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil 
         FROM posts 
         LEFT JOIN usuarios ON posts.id_usuario = usuarios.id_usuario 
         WHERE posts.id_post = $1
