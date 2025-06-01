@@ -83,7 +83,7 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (2, 'Como voces organizam suas pastas em projetos React? To tentando deixar mais limpo possivel.', NULL, '2025-04-12'),
 (2, 'Alguem ja usou Zustand no lugar do Redux? Vale a pena?', NULL, '2025-04-15'),
 (3, 'Nao aguento mais mexer com CSS. Flexbox me odeia, certeza.', NULL, '2025-04-13'),
-(3, 'Finalizei meu portfolio com HTML, CSS e um pouquinho de JS. To orgulhoso!', 'https://i.imgur.com/portfolio.png', '2025-04-16'),
+(3, 'Finalizei meu portfolio com HTML, CSS e um pouquinho de JS. To orgulhoso!', NULL, '2025-04-16'),
 (4, 'Docker mudou minha vida. Um caminho sem volta!', NULL, '2025-04-11'),
 (4, 'Configurei CI/CD com GitHub Actions, e foi mais facil do que achei.', NULL, '2025-04-13'),
 (4, 'Vale a pena investir tempo em testes unitarios logo no comeco?', NULL, '2025-04-17'),

@@ -97,6 +97,57 @@ router.get("/comments/:id", commentController.getCommentById);
 
 /**
  * @swagger
+ * /api/comments/{id}:
+ *   get:
+ *     summary: Busca comentário por ID incluindo dados do autor
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do comentário a ser buscado
+ *     responses:
+ *       200:
+ *         description: Comentário encontrado com dados do autor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id_comentario:
+ *                   type: integer
+ *                 id_usuario:
+ *                   type: integer
+ *                 id_post:
+ *                   type: integer
+ *                 conteudo_comentario:
+ *                   type: string
+ *                 anexo:
+ *                   type: string
+ *                   nullable: true
+ *                 data_publicacao:
+ *                   type: string
+ *                   format: date-time
+ *                 autor:
+ *                   type: object
+ *                   properties:
+ *                     username:
+ *                       type: string
+ *                     foto_perfil:
+ *                       type: string
+ *                       nullable: true
+ *       404:
+ *         description: Comentário não encontrado
+ *       500:
+ *         description: Erro interno ao buscar o comentário
+ */
+router.get("/comments/user/:id", commentController.getCommentByPostId);
+
+
+/**
+ * @swagger
  * /api/comments:
  *   post:
  *     summary: Cria um novo comentário
