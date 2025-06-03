@@ -184,7 +184,7 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (49, 'Meu app agora funciona offline. Nunca pensei que conseguiria.', NULL, '2025-04-14'),
 (50, 'Iniciei uma mentoria pra devs junior. Muito gratificante.', NULL, '2025-04-13'),
 (50, 'Refatorei um monolito em microservicos. Agora entendo a complexidade real disso.', NULL, '2025-04-15'),
-(51, 'Mostre seu design UX/UI favorito! Eu começo:', 'ux-ui.jpg', '2025-06-03'),
+(51, 'Mostre seu design UX/UI favorito! Eu comeco:', 'ux-ui.jpg', '2025-06-03'),
 (52, 'Comecei a usar o Figma para prototipos interativos!', 'interface-do-figma.jpg', '2025-06-03'),
 (53, 'Qual a melhor forma de organizar componentes React em projetos grandes?', 'meme-pastas.jpg', '2025-06-04'),
 (54, 'Tava sempre me perdendo com os componentes do React, entao criei um repositorio com varios deles', 'components-react.png', '2025-06-04'),
