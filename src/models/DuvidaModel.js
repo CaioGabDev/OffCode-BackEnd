@@ -4,10 +4,8 @@ const getDuvidas = async (conteudo) => {
     if (!conteudo) {
         const result = await pool.query(`
             SELECT duvidas.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil,
-            COUNT(curtidas.id_curtida) AS quantidade_curtidas
             FROM duvidas 
             LEFT JOIN usuarios ON duvidas.id_usuario = usuarios.id_usuario
-            LEFT JOIN curtidas ON duvidas.id_post = curtidas.id_post
             GROUP BY duvidas.id_post, usuarios.nome, usuarios.foto_perfil
             ORDER BY duvidas.id_post ASC
         `);
