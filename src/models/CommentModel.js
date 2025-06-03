@@ -31,6 +31,26 @@ const getCommentsByPostId = async (id_post) => {
   return result.rows.length ? result.rows : { message: 'Nenhum comentário encontrado para este post.' };
 };
 
+
+const getCommentsByDuvidaId = async (id_post) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        c.id_comentario, c.id_usuario, c.id_post, c.conteudo_comentario, c.anexo, c.data_publicacao,
+        u.username, u.foto_perfil
+      FROM comentarios c
+      JOIN usuarios u ON c.id_usuario = u.id_usuario
+      WHERE c.id_post = $1
+      ORDER BY c.data_publicacao ASC
+    `, [id_post]);
+    return result.rows;
+  } catch (error) {
+    console.error('Erro na query getComentariosByDuvidaId:', error);
+    throw error;
+  }
+};
+
+
 const updateComment = async (id, data) => {
     const { conteudo_comentario, anexo, data_publicacao } = data;
     const result = await pool.query(
@@ -54,4 +74,4 @@ const deleteComment = async (id) => {
     return result.rowCount ? { message: "Comentário deletado com sucesso.", deleted: result.rows[0] } : { error: "Comentário não encontrado." };
 };
 
-module.exports = { getComments, getCommentById, getCommentsByPostId, deleteComment, updateComment, createComment };
+module.exports = { getComments, getCommentById, getCommentsByPostId, getCommentsByDuvidaId, deleteComment, updateComment, createComment };

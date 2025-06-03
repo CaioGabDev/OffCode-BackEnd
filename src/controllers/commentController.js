@@ -34,6 +34,17 @@ const getCommentByPostId = async (req, res) => {
   }
 };
 
+const getCommentByDuvidaId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comentarios = await CommentModel.getCommentsByDuvidaId(id);
+    res.json(comentarios);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar comentários da dúvida' });
+  }
+};
+
 const deleteComment = async (req, res) => {
     try {
         const result = await CommentModel.deleteComment(req.params.id);
@@ -72,4 +83,4 @@ const createComment = async (req, res) => {
     }
 };
 
-module.exports = { getAllComments, getCommentById, getCommentByPostId, deleteComment, updateComment, createComment };
+module.exports = { getAllComments, getCommentById, getCommentByPostId, getCommentByDuvidaId ,deleteComment, updateComment, createComment };

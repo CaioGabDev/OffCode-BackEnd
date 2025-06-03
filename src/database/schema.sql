@@ -193,7 +193,7 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 
 
 CREATE TABLE duvidas (
-    id_post SERIAL PRIMARY KEY,
+    id_duvida SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL, 
     conteudo_duvida TEXT NOT NULL,
     anexo TEXT, 
@@ -301,56 +301,7 @@ INSERT INTO duvidas (id_usuario, conteudo_duvida, anexo, data_publicacao) VALUES
 (49, 'Quais cuidados tomar ao criar PWA com suporte offline?', NULL, '2025-04-21'),
 (49, 'E possivel usar service workers em apps com rotas dinamicas?', NULL, '2025-04-22'),
 (50, 'Como comecar a aplicar arquitetura hexagonal em projetos reais?', NULL, '2025-04-20'),
-(50, 'Qual a melhor estrutura de pastas para manter dominios separados?', NULL, '2025-04-21'),
-(2, NULL, 1, 'Uma dica para melhorar queries SQL complexas é usar EXPLAIN ANALYZE para identificar gargalos.', NULL, '2025-06-01'),
-(3, NULL, 2, 'Índices em colunas JSON podem ajudar, mas avalie o uso real antes de criar.', NULL, '2025-06-01'),
-(4, NULL, 3, 'Para produção, sempre use variáveis de ambiente e um gerenciador de processos como PM2.', NULL, '2025-06-01'),
-(5, NULL, 4, 'PM2 é ótimo para produção, mas em dev pode ser exagero.', NULL, '2025-06-01'),
-(6, NULL, 5, 'Versione o banco com ferramentas como Flyway ou Liquibase para manter controle.', NULL, '2025-06-01'),
-(7, NULL, 6, 'Prefiro Flyway pela simplicidade, mas Liquibase é mais flexível.', NULL, '2025-06-01'),
-(8, NULL, 7, 'Sempre faça backup antes de resolver conflitos de merge no Git.', NULL, '2025-06-01'),
-(9, NULL, 8, 'Para branches grandes, prefiro rebase para manter o histórico limpo.', NULL, '2025-06-01'),
-(10, NULL, 9, 'REST é mais simples, mas GraphQL oferece mais flexibilidade.', NULL, '2025-06-01'),
-(11, NULL, 10, 'GraphQL pode ser usado em sistemas simples, mas avalie a complexidade.', NULL, '2025-06-01'),
-(12, NULL, 11, 'Para debugar erros intermitentes, invista em logs detalhados.', NULL, '2025-06-01'),
-(13, NULL, 12, 'Logs estruturados facilitam muito a análise de problemas.', NULL, '2025-06-01'),
-(14, NULL, 13, 'Use cache TTL curto para dados em tempo real.', NULL, '2025-06-01'),
-(15, NULL, 14, 'Além de cache-control, avalie uso de SWR ou React Query no front.', NULL, '2025-06-01'),
-(16, NULL, 15, 'Organize projetos React por domínio ou feature.', NULL, '2025-06-01'),
-(17, NULL, 16, 'Atomic Design ajuda na escalabilidade de projetos grandes.', NULL, '2025-06-01'),
-(18, NULL, 17, 'TDD é eficiente, mas exige disciplina e prática.', NULL, '2025-06-01'),
-(19, NULL, 18, 'Uso Jest e Supertest para testes automatizados em Node.', NULL, '2025-06-01'),
-(20, NULL, 19, 'Evite acoplamento usando interfaces e eventos.', NULL, '2025-06-01'),
-(21, NULL, 20, 'Mensageria como RabbitMQ ou Kafka ajuda a desacoplar serviços.', NULL, '2025-06-01'),
-(22, NULL, 21, 'Organize arquivos estáticos por tipo em uma pasta pública.', NULL, '2025-06-01'),
-(23, NULL, 22, 'Em projetos grandes, siga um padrão de organização para arquivos estáticos.', NULL, '2025-06-01'),
-(24, NULL, 23, 'Para uploads grandes, prefira streaming para evitar timeout.', NULL, '2025-06-01'),
-(25, NULL, 24, 'Streaming é melhor para uploads, pois consome menos memória.', NULL, '2025-06-01'),
-(26, NULL, 25, 'Validações podem ficar no service, mas valide também no controller.', NULL, '2025-06-01'),
-(27, NULL, 26, 'Yup e Zod são ótimas opções para validação no back-end.', NULL, '2025-06-01'),
-(28, NULL, 27, 'Prefiro Sequelize pela praticidade, mas query builders dão mais controle.', NULL, '2025-06-01'),
-(29, NULL, 28, 'Saber SQL puro é importante mesmo usando ORM.', NULL, '2025-06-01'),
-(30, NULL, 29, 'Para testar endpoints protegidos, use mocks de autenticação.', NULL, '2025-06-01'),
-(31, NULL, 30, 'JWT pode dificultar testes, mas é possível mockar tokens.', NULL, '2025-06-01'),
-(32, NULL, 31, 'Separe rotas públicas e privadas em arquivos diferentes.', NULL, '2025-06-01'),
-(33, NULL, 32, 'Padronize middlewares de autenticação para facilitar manutenção.', NULL, '2025-06-01'),
-(34, NULL, 33, 'Prefiro styled-components pela flexibilidade, mas Tailwind é mais rápido.', NULL, '2025-06-01'),
-(35, NULL, 34, 'Tailwind facilita a padronização visual em projetos grandes.', NULL, '2025-06-01'),
-(36, NULL, 35, 'Para dependências desatualizadas, use ferramentas como Dependabot.', NULL, '2025-06-01'),
-(37, NULL, 36, 'Ferramentas como SonarQube ajudam na verificação automática.', NULL, '2025-06-01'),
-(38, NULL, 37, 'Separe controller e service para manter o código limpo.', NULL, '2025-06-01'),
-(39, NULL, 38, 'DDD pode ser exagero em apps pequenos, mas traz benefícios.', NULL, '2025-06-01'),
-(40, NULL, 39, 'OAuth2 é indicado para apps web que precisam de segurança.', NULL, '2025-06-01'),
-(41, NULL, 40, 'Para apps internos, OAuth2 pode ser exagerado.', NULL, '2025-06-01'),
-(42, NULL, 41, 'Use JWT com expiração curta e valide em cada microserviço.', NULL, '2025-06-01'),
-(43, NULL, 42, 'Evite armazenar refresh tokens no localStorage, prefira cookies HttpOnly.', NULL, '2025-06-01'),
-(44, NULL, 43, 'Gerencie múltiplos estados em React usando Context API ou Redux.', NULL, '2025-06-01'),
-(45, NULL, 44, 'Zustand é mais simples que Redux, vale testar.', NULL, '2025-06-01'),
-(46, NULL, 45, 'Para testes de integração entre microserviços, use test doubles e ambientes isolados.', NULL, '2025-06-01'),
-(47, NULL, 46, 'Testes de contrato garantem integração entre serviços, diferente dos unitários.', NULL, '2025-06-01'),
-(48, NULL, 47, 'Para deploy contínuo com Docker, use pipelines automatizados.', NULL, '2025-06-01'),
-(49, NULL, 48, 'No CI/CD, mantenha variáveis de ambiente seguras usando secrets.', NULL, '2025-06-01'),
-(50, NULL, 49, 'Organize rotas do Express por módulos para facilitar manutenção.', NULL, '2025-06-01');
+(50, 'Qual a melhor estrutura de pastas para manter dominios separados?', NULL, '2025-04-21');
 
 
 
@@ -363,7 +314,8 @@ CREATE TABLE comentarios (
     anexo TEXT, 
     data_publicacao DATE,
     CONSTRAINT fk_usuario_comentario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-    CONSTRAINT fk_post_comentario FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE
+    CONSTRAINT fk_post_comentario FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE,
+    CONSTRAINT fk_duvida_comentario FOREIGN KEY (id_duvida) REFERENCES duvidas(id_duvida) ON DELETE CASCADE
 );
 
 INSERT INTO comentarios (id_usuario, id_post, id_duvida, conteudo_comentario, anexo, data_publicacao) VALUES
