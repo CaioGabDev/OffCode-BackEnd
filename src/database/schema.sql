@@ -84,14 +84,9 @@ CREATE TABLE posts (
 
 
 INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
-(51, 'Mostre seu design UX/UI favorito! Eu começo:', 'ux-ui.jpg', '2025-06-03'),
-(52, 'Comecei a usar o Figma para prototipos interativos!', 'interface-do-figma.jpg', '2025-06-03'),
-(53, 'Qual a melhor forma de organizar componentes React em projetos grandes?', 'meme-pastas.jpg', '2025-06-04'),
-(54, 'Tava sempre me perdendo com os componentes do React, entao criei um repositorio com varios deles', 'componentes-react.png', '2025-06-04'),
-(55, 'Descobri hoje que da pra usar `COALESCE` pra evitar `NULL` no SQL. Nunca mais uso `IFNULL` errado.', NULL, '2025-04-10'),
+
 (1, 'Organizei minha primeira REST API com Node.js e Express! Quem quiser feedback, estou aceitando dicas!', NULL, '2025-04-14'),
 (2, 'Como voces organizam suas pastas em projetos React? To tentando deixar mais limpo possivel.', NULL, '2025-04-12'),
-(56, 'Alguem ja usou Zustand no lugar do Redux? Vale a pena?', NULL, '2025-04-15'),
 (3, 'Nao aguento mais mexer com CSS. Flexbox me odeia, certeza.', NULL, '2025-04-13'),
 (3, 'Finalizei meu portfolio com HTML, CSS e um pouquinho de JS. To orgulhoso!', NULL, '2025-04-16'),
 (4, 'Docker mudou minha vida. Um caminho sem volta!', NULL, '2025-04-11'),
@@ -188,7 +183,13 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 (49, 'PWA e o futuro? To gostando da experiencia.', NULL, '2025-04-12'),
 (49, 'Meu app agora funciona offline. Nunca pensei que conseguiria.', NULL, '2025-04-14'),
 (50, 'Iniciei uma mentoria pra devs junior. Muito gratificante.', NULL, '2025-04-13'),
-(50, 'Refatorei um monolito em microservicos. Agora entendo a complexidade real disso.', NULL, '2025-04-15');
+(50, 'Refatorei um monolito em microservicos. Agora entendo a complexidade real disso.', NULL, '2025-04-15'),
+(51, 'Mostre seu design UX/UI favorito! Eu comeco:', 'ux-ui.jpg', '2025-06-03'),
+(52, 'Comecei a usar o Figma para prototipos interativos!', 'interface-do-figma.jpg', '2025-06-03'),
+(53, 'Qual a melhor forma de organizar componentes React em projetos grandes?', 'meme-pastas.jpg', '2025-06-04'),
+(54, 'Tava sempre me perdendo com os componentes do React, entao criei um repositorio com varios deles', 'components-react.png', '2025-06-04'),
+(55, 'Descobri hoje que da pra usar `COALESCE` pra evitar `NULL` no SQL. Nunca mais uso `IFNULL` errado.', NULL, '2025-04-10'),
+(56, 'Alguem ja usou Zustand no lugar do Redux? Vale a pena?', NULL, '2025-04-15');
 
 
 CREATE TABLE duvidas (
