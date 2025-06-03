@@ -3,10 +3,9 @@ const pool = require("../config/database");
 const getDuvidas = async (conteudo) => {
     if (!conteudo) {
         const result = await pool.query(`
-            SELECT duvidas.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil,
+            SELECT duvidas.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil
             FROM duvidas 
             LEFT JOIN usuarios ON duvidas.id_usuario = usuarios.id_usuario
-            GROUP BY duvidas.id_post, usuarios.nome, usuarios.foto_perfil
             ORDER BY duvidas.id_post ASC
         `);
         return result.rows;
@@ -17,8 +16,8 @@ const getDuvidas = async (conteudo) => {
             FROM duvidas 
             LEFT JOIN usuarios ON duvidas.id_usuario = usuarios.id_usuario
             LEFT JOIN curtidas ON duvidas.id_post = curtidas.id_post
-            WHERE duvidas.conteudo_post ILIKE $1
-            GROUP BY duvidas.id_post, usuarios.nome, usuarios.foto_perfil
+            WHERE duvidas.conteudo_duvida ILIKE $1
+            GROUP BY duvidas.id_post, duvidas.conteudo_duvida, duvidas.anexo, duvidas.data_publicacao, duvidas.id_usuario, duvidas.id_duvida, usuarios.nome, usuarios.foto_perfil
             ORDER BY duvidas.id_post DESC
         `, [`%${conteudo}%`]);
         return result.rows;
