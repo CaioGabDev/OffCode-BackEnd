@@ -65,7 +65,13 @@ INSERT INTO usuarios (nome, username, email, senha, tipo_conta, foto_perfil, fot
 ('Alan Fernandes', '@alanfernandes', 'alan.fernandes@devmail.com', '1234', 'Empresa', NULL, NULL, 'Desenvolvedor backend especializado em autenticacao.', 'backend'),
 ('Livia Gomes', '@liviagomes', 'livia.gomes@codehub.dev', '1234', 'Pessoal', NULL, NULL, 'Frontend focada em performance e web mobile first.', 'frontend'),
 ('Cesar Oliveira', '@cesardev', 'cesar.oliveira@techmail.com', '1234', 'Empresa', NULL, NULL, 'Entusiasta de C# e clean architecture.', 'backend'),
-('Elaine Ferreira', '@elaineferreira', 'elaine.ferreira@devmail.com', '1234', 'Pessoal', NULL, NULL, 'Desenvolvedora apaixonada por comunidades de codigo aberto.', 'opensource');
+('Elaine Ferreira', '@elaineferreira', 'elaine.ferreira@devmail.com', '1234', 'Pessoal', NULL, NULL, 'Desenvolvedora apaixonada por comunidades de codigo aberto.', 'opensource'),
+('Ana Carolina', '@anacarolina', 'anacarol@devmail.com', '1234', 'Pessoal', 'anac.jpg', NULL, 'Desenvolvedora apaixonada por comunidades de codigo aberto.', 'opensource'),
+('Ana Julia', '@anajulia', 'anaju@devmail.com', '1234', 'Pessoal', 'anaj.jpg', NULL, 'Desenvolvedora apaixonada por comunidades de codigo aberto.', 'opensource'),
+('Beatriz Lima', '@bea', 'bea@devmail.com', '1234', 'Pessoal', 'bea.jpg', NULL, 'Desenvolvedora apaixonada por comunidades de codigo aberto.', 'opensource'),
+('Luana Domeneghetti', '@domeneghettii', 'domeneghettii@devmail.com', '1234', 'Pessoal', 'luana.jpg', NULL, 'Desenvolvedora apaixonada por comunidades de codigo aberto.', 'opensource'),
+('Caio Lacerda', '@caiodev', 'caio@devmail.com', '1234', 'Pessoal', 'caio.jpg', NULL, 'Especialista em APIs REST e arquitetura de microsservicos.', 'backend'),
+('Bernardo Marques', '@bernardo', 'bernardo@devmail.com', '1234', 'Pessoal', 'bernardo.jpg', NULL, 'Especialista em APIs REST e arquitetura de microsservicos.', 'backend');
 
 CREATE TABLE posts (
     id_post SERIAL PRIMARY KEY,
@@ -78,10 +84,14 @@ CREATE TABLE posts (
 
 
 INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
-(1, 'Descobri hoje que da pra usar `COALESCE` pra evitar `NULL` no SQL. Nunca mais uso `IFNULL` errado.', NULL, '2025-04-10'),
+(51, 'Mostre seu design UX/UI favorito! Eu começo:', 'ux-ui.jpg', '2025-06-03'),
+(52, 'Comecei a usar o Figma para prototipos interativos!', 'interface-do-figma.jpg', '2025-06-03'),
+(53, 'Qual a melhor forma de organizar componentes React em projetos grandes?', 'meme-pastas.jpg', '2025-06-04'),
+(54, 'Tava sempre me perdendo com os componentes do React, entao criei um repositorio com varios deles', 'componentes-react.png', '2025-06-04'),
+(55, 'Descobri hoje que da pra usar `COALESCE` pra evitar `NULL` no SQL. Nunca mais uso `IFNULL` errado.', NULL, '2025-04-10'),
 (1, 'Organizei minha primeira REST API com Node.js e Express! Quem quiser feedback, estou aceitando dicas!', NULL, '2025-04-14'),
 (2, 'Como voces organizam suas pastas em projetos React? To tentando deixar mais limpo possivel.', NULL, '2025-04-12'),
-(2, 'Alguem ja usou Zustand no lugar do Redux? Vale a pena?', NULL, '2025-04-15'),
+(56, 'Alguem ja usou Zustand no lugar do Redux? Vale a pena?', NULL, '2025-04-15'),
 (3, 'Nao aguento mais mexer com CSS. Flexbox me odeia, certeza.', NULL, '2025-04-13'),
 (3, 'Finalizei meu portfolio com HTML, CSS e um pouquinho de JS. To orgulhoso!', NULL, '2025-04-16'),
 (4, 'Docker mudou minha vida. Um caminho sem volta!', NULL, '2025-04-11'),
