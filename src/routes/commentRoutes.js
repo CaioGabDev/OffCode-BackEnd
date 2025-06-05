@@ -145,6 +145,54 @@ router.get("/comments/:id", commentController.getCommentById);
  */
 router.get("/comments/user/:id", commentController.getCommentByPostId);
 
+/**
+ * @swagger
+ * /api/duvidas/{id}/comments:
+ *   get:
+ *     summary: Busca comentários da dúvida por ID da dúvida
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID da dúvida (id_post da tabela duvidas)
+ *     responses:
+ *       200:
+ *         description: Lista de comentários da dúvida
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id_comentario:
+ *                     type: integer
+ *                   id_usuario:
+ *                     type: integer
+ *                   id_post:
+ *                     type: integer
+ *                   conteudo_comentario:
+ *                     type: string
+ *                   anexo:
+ *                     type: string
+ *                     nullable: true
+ *                   data_publicacao:
+ *                     type: string
+ *                     format: date-time
+ *                   username:
+ *                     type: string
+ *                   foto_perfil:
+ *                     type: string
+ *                     nullable: true
+ *       404:
+ *         description: Nenhum comentário encontrado para esta dúvida
+ *       500:
+ *         description: Erro interno ao buscar os comentários
+ */
+router.get("/comments/duvida/:id", commentController.getCommentByDuvidaId);
 
 /**
  * @swagger

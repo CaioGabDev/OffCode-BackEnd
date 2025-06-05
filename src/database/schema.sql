@@ -193,7 +193,7 @@ INSERT INTO posts (id_usuario, conteudo_post, anexo, data_publicacao) VALUES
 
 
 CREATE TABLE duvidas (
-    id_post SERIAL PRIMARY KEY,
+    id_duvida SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL, 
     conteudo_duvida TEXT NOT NULL,
     anexo TEXT, 
@@ -314,7 +314,8 @@ CREATE TABLE comentarios (
     anexo TEXT, 
     data_publicacao DATE,
     CONSTRAINT fk_usuario_comentario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-    CONSTRAINT fk_post_comentario FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE
+    CONSTRAINT fk_post_comentario FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE,
+    CONSTRAINT fk_duvida_comentario FOREIGN KEY (id_duvida) REFERENCES duvidas(id_duvida) ON DELETE CASCADE
 );
 
 INSERT INTO comentarios (id_usuario, id_post, id_duvida, conteudo_comentario, anexo, data_publicacao) VALUES
