@@ -1,18 +1,19 @@
-const DudvidaModel = require('../models/DuvidaModel');
+const DuvidaModel = require('../models/DuvidaModel');
 
 const getAllDuvidas = async (req, res) => {
     try {
-        const { conteudo } = req.query;
-        const duvidas = await DudvidaModel.getDuvidas(conteudo);
+        const { conteudo_duvida } = req.query;
+        const duvidas = await DuvidaModel.getDuvidas(conteudo_duvida);
         res.json(duvidas);
     } catch (error) {
+        console.error('Erro ao buscar dúvidas:', error); // <-- Adicione este log
         res.status(500).json({ error: 'Erro ao buscar dúvidas.' });
     }
 };
 
 const getById = async (req, res) => {
     try {
-        const duvida = await DudvidaModel.getDuvidaById(req.params.id);
+        const duvida = await DuvidaModel.getDuvidaById(req.params.id);
         if (!duvida) {
             return res.status(404).json({ error: 'Dúvida não encontrada.' });
         }
@@ -26,7 +27,7 @@ const createDuvida = async (req, res) => {
     try {
         const { conteudo_duvida, id_usuario } = req.body;
         const anexo = req.file ? req.file.filename : null;
-        const newDuvida = await DudvidaModel.createDuvida(conteudo_duvida, anexo, id_usuario);
+        const newDuvida = await DuvidaModel.createDuvida(conteudo_duvida, anexo, id_usuario);
         res.status(201).json(newDuvida);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao criar dúvida.' });
@@ -36,7 +37,7 @@ const createDuvida = async (req, res) => {
 const updateDuvida = async (req, res) => {
     try {
         const { conteudo_duvida, anexo } = req.body;
-        const duvida = await DudvidaModel.updateDuvida(req.params.id, conteudo_duvida, anexo);
+        const duvida = await DuvidaModel.updateDuvida(req.params.id, conteudo_duvida, anexo);
         if (!duvida) {
             return res.status(404).json({ error: 'Dúvida não encontrada.' });
         }
@@ -48,7 +49,7 @@ const updateDuvida = async (req, res) => {
 
 const deleteDuvida = async (req, res) => {
     try {
-        const result = await DudvidaModel.deleteDuvida(req.params.id);
+        const result = await DuvidaModel.deleteDuvida(req.params.id);
         if (result.error) {
             return res.status(404).json(result);
         }
