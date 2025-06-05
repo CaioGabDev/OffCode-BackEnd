@@ -143,7 +143,7 @@ router.get("/comments/:id", commentController.getCommentById);
  *       500:
  *         description: Erro interno ao buscar o comentário
  */
-router.get("/comments/user/:id", commentController.getCommentByPostId);
+router.get("/comments/post/:id_post", commentController.getCommentByPostId);
 
 /**
  * @swagger
@@ -192,7 +192,7 @@ router.get("/comments/user/:id", commentController.getCommentByPostId);
  *       500:
  *         description: Erro interno ao buscar os comentários
  */
-router.get("/comments/duvida/:id", commentController.getCommentByDuvidaId);
+router.get("/comments/duvida/:id_duvida", commentController.getCommentByDuvidaId);
 
 /**
  * @swagger

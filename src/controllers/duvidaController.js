@@ -2,8 +2,8 @@ const DudvidaModel = require('../models/DuvidaModel');
 
 const getAllDuvidas = async (req, res) => {
     try {
-        const { conteudo } = req.query;
-        const duvidas = await DudvidaModel.getDuvidas(conteudo);
+        const { conteudo_duvida } = req.query;
+        const duvidas = await DudvidaModel.getDuvidas(conteudo_duvida);
         res.json(duvidas);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar dúvidas.' });

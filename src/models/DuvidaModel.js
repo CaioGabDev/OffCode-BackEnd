@@ -1,7 +1,7 @@
 const pool = require("../config/database");
 
-const getDuvidas = async (conteudo) => {
-    if (!conteudo) {
+const getDuvidas = async (conteudo_duvida) => {
+    if (!conteudo_duvida) {
         const result = await pool.query(`
             SELECT duvidas.*, usuarios.nome AS usuario_nome, usuarios.foto_perfil
             FROM duvidas 
@@ -19,7 +19,7 @@ const getDuvidas = async (conteudo) => {
             WHERE duvidas.conteudo_duvida ILIKE $1
             GROUP BY duvidas.id_post, duvidas.conteudo_duvida, duvidas.anexo, duvidas.data_publicacao, duvidas.id_usuario, duvidas.id_duvida, usuarios.nome, usuarios.foto_perfil
             ORDER BY duvidas.id_post DESC
-        `, [`%${conteudo}%`]);
+        `, [`%${conteudo_duvida}%`]);
         return result.rows;
     }
 };
